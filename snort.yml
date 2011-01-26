@@ -48,7 +48,7 @@ site:
             else if (window.GeckoActiveXObject)
               player = new GeckoActiveXObject("WMPlayer.OCX.7");
             else
-              player = navigator.mimeTypes["application/x-mplayer2"].enabledPlugin;		
+              player = navigator.mimeTypes["application/x-mplayer2"].enabledPlugin;    
           }
           catch(e)
           {
@@ -63,3 +63,226 @@ site:
   inline: |
          if( !is.min )
            document.write( 'Your browser does not support dynamic html. Please download a current version of either <a href="http://www.microsoft.com/ie/">Microsoft Internet Explorer</a> or <a href="http://www.mozilla.com/en-US/firefox/">Mozilla Firefox </a> and try visiting our site again.  Thank You.<br /><br />' )
+
+site:
+  name: philosophy.com
+  script: http://www.philosophy.com/wcsstore/RosettaStore/javascript/BrowserDetect.js
+  date: 2011-01-26
+  sniff: |
+        var BrowserDetect = {
+          init: function () {
+            this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
+            this.version = this.searchVersion(navigator.userAgent)
+              || this.searchVersion(navigator.appVersion)
+              || "an unknown version";
+            this.OS = this.searchString(this.dataOS) || "an unknown OS";
+          },
+          searchString: function (data) {
+            for (var i=0;i<data.length;i++)  {
+              var dataString = data[i].string;
+              var dataProp = data[i].prop;
+              this.versionSearchString = data[i].versionSearch || data[i].identity;
+              if (dataString) {
+                if (dataString.indexOf(data[i].subString) != -1)
+                  return data[i].identity;
+              }
+              else if (dataProp)
+                return data[i].identity;
+            }
+          },
+          searchVersion: function (dataString) {
+            var index = dataString.indexOf(this.versionSearchString);
+            if (index == -1) return;
+            return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
+          },
+          dataBrowser: [
+            {
+              string: navigator.userAgent,
+              subString: "Chrome",
+              identity: "Chrome"
+            },
+            {   string: navigator.userAgent,
+              subString: "OmniWeb",
+              versionSearch: "OmniWeb/",
+              identity: "OmniWeb"
+            },
+            {
+              string: navigator.vendor,
+              subString: "Apple",
+              identity: "Safari",
+              versionSearch: "Version"
+            },
+            {
+              prop: window.opera,
+              identity: "Opera"
+            },
+            {
+              string: navigator.vendor,
+              subString: "iCab",
+              identity: "iCab"
+            },
+            {
+              string: navigator.vendor,
+              subString: "KDE",
+              identity: "Konqueror"
+            },
+            {
+              string: navigator.userAgent,
+              subString: "Firefox",
+              identity: "Firefox"
+            },
+            {
+              string: navigator.vendor,
+              subString: "Camino",
+              identity: "Camino"
+            },
+            {    // for newer Netscapes (6+)
+              string: navigator.userAgent,
+              subString: "Netscape",
+              identity: "Netscape"
+            },
+            {
+              string: navigator.userAgent,
+              subString: "MSIE",
+              identity: "Explorer",
+              versionSearch: "MSIE"
+            },
+            {
+              string: navigator.userAgent,
+              subString: "Gecko",
+              identity: "Mozilla",
+              versionSearch: "rv"
+            },
+            {     // for older Netscapes (4-)
+              string: navigator.userAgent,
+              subString: "Mozilla",
+              identity: "Netscape",
+              versionSearch: "Mozilla"
+            }
+          ],
+          dataOS : [
+            {
+                 string: navigator.userAgent,
+                 subString: "iPhone",
+                 identity: "iPhone"
+              },
+              {
+                  string: navigator.userAgent,
+                  subString: "iPad",
+                  identity: "iPad"
+              },
+            {
+              string: navigator.platform,
+              subString: "Win",
+              identity: "Windows"
+            },
+            {
+              string: navigator.platform,
+              subString: "Mac",
+              identity: "Mac"
+            },
+            {
+                string: navigator.platform,
+                subString: "Linux",
+                identity: "Linux"
+            }
+          ]
+        
+        };
+        BrowserDetect.init();
+        
+        if(BrowserDetect.OS == 'Windows'){
+          if(BrowserDetect.browser == 'Explorer'){
+            if(BrowserDetect.version >= 7){
+              //Browser Supported
+              document.writeln('<div id="supported_browser" value="true" style="display:none;">\n<\/div>');
+            }
+            else{
+              //Browser not supported
+              document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
+            }
+          }
+          else if(BrowserDetect.browser == 'Firefox'){
+            if(BrowserDetect.version >= 3){
+              //Browser Supported
+              document.writeln('<div id="supported_browser" value="true" style="display:none;">\n<\/div>');
+            }
+            else{
+              //Browser not supported
+              document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
+            }
+          }
+          else if(BrowserDetect.browser == 'Chrome'){
+            if(BrowserDetect.version >= 3){
+              //Browser Supported
+              document.writeln('<div id="supported_browser" value="flase" style="display:none;">\n<\/div>');
+            }    
+            else{
+              //Browser not supported
+              document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
+            }
+          }
+          else{
+              //Browser not supported
+              document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
+          }
+        }
+        else if(BrowserDetect.OS == 'Mac'){
+          if(BrowserDetect.browser == 'Safari'){
+            if(BrowserDetect.version >= 4){
+              //Browser Supported
+              document.writeln('<div id="supported_browser" value="true" style="display:none;">\n<\/div>');      
+            }
+            else{
+              //Browser not supported
+              document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
+            }
+          }
+          else if(BrowserDetect.browser == 'Firefox'){
+            if(BrowserDetect.version >= 3){
+              //Browser Supported
+              document.writeln('<div id="supported_browser" value="true" style="display:none;">\n<\/div>');
+            }    
+            else{
+              //Browser not supported
+              document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
+            }
+          }
+          else if(BrowserDetect.browser == 'Chrome'){
+            if(BrowserDetect.version >= 3){
+              //Browser Supported
+              document.writeln('<div id="supported_browser" value="true" style="display:none;">\n<\/div>');
+            }    
+            else{
+              //Browser not supported
+              document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
+            }
+          }
+          else{
+              //Browser not supported
+              document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
+          }
+        }
+        else if((BrowserDetect.OS == 'iPhone') || (BrowserDetect.OS == 'iPad') || (BrowserDetect.OS == 'iPod')){
+          if(BrowserDetect.browser == 'Safari'){
+            if(BrowserDetect.version >= 4){
+              //Browser Supported
+              document.writeln('<div id="supported_browser" value="true" style="display:none;">\n<\/div>');      
+            }
+            else{
+              //Browser not supported
+              document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
+            }
+          }
+        }
+        else{
+              //Browser not supported
+              document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
+        }
+
+#site: 
+#  name:
+#  script:
+#  date:
+#  sniff:
+#  inline: (optional, if there's inline code calling an embedded script)
