@@ -1,0 +1,16 @@
+site:
+  name: cornify.com
+  script:  http://www.cornify.com/js/rainbow.js
+  date: 2011-01-26
+  sniff: | 
+        // Only create rainbow canvas if browser supports the canvas tag.
+        var rainbowCanvas;
+        function startRainbow(){
+          var canvas = document.createElement('canvas');
+          var isFirefox = (/firefox|minefield/i.test(navigator.userAgent));
+          //isFirefox = false;
+          if (!!canvas.getContext && !isFirefox) {
+            rainbowCanvas = new RainbowCanvas();
+            rainbowCanvas.init(canvas);
+          }
+        }
