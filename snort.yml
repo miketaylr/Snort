@@ -14,3 +14,52 @@ site:
             rainbowCanvas.init(canvas);
           }
         }
+
+site:
+  name: dynamat.com
+  script: http://dynamat.com/trivantis.js
+  date: 2011-01-26
+  sniff: |
+        function BrowserProps() {
+          var name = navigator.appName
+          
+          if (name=="Netscape") name = "ns"
+          else if (name=="Microsoft Internet Explorer") name = "ie"
+          
+          this.v = parseInt(navigator.appVersion,10)
+          this.ns = (name=="ns" && this.v>=4)
+          this.ns4 = (this.ns && this.v==4)
+          this.ns5 = (this.ns && this.v==5)
+          this.nsMac = (this.ns && navigator.platform.indexOf("Mac") >= 0 )
+          this.ie = (name=="ie" && this.v>=4)
+          this.ie4 = (this.ie && navigator.appVersion.indexOf('MSIE 4')>0)
+          this.ie5 = (this.ie && navigator.appVersion.indexOf('MSIE 5')>0)
+          this.ieMac = (this.ie && navigator.platform.indexOf("Mac") >= 0 )
+          this.op = navigator.userAgent.indexOf("Opera")!=-1
+          this.min = (this.ns||this.ie)
+          this.Mac = (navigator.platform.indexOf("Mac") >= 0)
+          this.activeX = ( this.ie ) ? true : false; 
+          this.wmpVersion = 6; // default version number we only support 7 and up
+          var player = null;
+          try 
+          {
+            if(window.ActiveXObject)
+              player = new ActiveXObject("WMPlayer.OCX.7");
+            else if (window.GeckoActiveXObject)
+              player = new GeckoActiveXObject("WMPlayer.OCX.7");
+            else
+              player = navigator.mimeTypes["application/x-mplayer2"].enabledPlugin;		
+          }
+          catch(e)
+          {
+            // Handle error only if title has wmp-- no WMP control
+          }
+          if( player && player.versionInfo ) {
+            this.wmpVersion = player.versionInfo.slice(0,player.versionInfo.indexOf('.'));
+          }
+        }
+        
+        is = new BrowserProps()       
+  inline: |
+         if( !is.min )
+           document.write( 'Your browser does not support dynamic html. Please download a current version of either <a href="http://www.microsoft.com/ie/">Microsoft Internet Explorer</a> or <a href="http://www.mozilla.com/en-US/firefox/">Mozilla Firefox </a> and try visiting our site again.  Thank You.<br /><br />' )
