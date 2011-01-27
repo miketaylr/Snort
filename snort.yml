@@ -280,6 +280,18 @@ site:
               document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
         }
 
+site:
+  name: github.com
+  script:  https://github.com/404
+  date: 2011-01-27
+  sniff: | 
+        // Detect if the browser is IE or not.
+        // If it is not IE, we assume that the browser is NS.
+        var IE = document.all?true:false;
+
+        // If NS -- that is, !IE -- then set up for mouse capture
+        if (!IE) document.captureEvents(Event.MOUSEMOVE);
+
 #site: 
 #  name:
 #  script:
