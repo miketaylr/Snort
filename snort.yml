@@ -288,9 +288,20 @@ site:
         // Detect if the browser is IE or not.
         // If it is not IE, we assume that the browser is NS.
         var IE = document.all?true:false;
-
+        
         // If NS -- that is, !IE -- then set up for mouse capture
         if (!IE) document.captureEvents(Event.MOUSEMOVE);
+
+site:
+  name: github.com/keithclark/selectivizr
+  script: https://github.com/keithclark/selectivizr/blob/cb49ce2ca23d2f61626af3676b6236b61f320f40/selectivizr.js
+  date: 2011-01-31
+  sniff: |var ieVersion = /MSIE ([\d])/.exec(navigator.userAgent)[1];
+       // If were not in standards mode, IE is too old / new or we can't create
+       // an XMLHttpRequest object then we should get out now.
+       if (doc.compatMode != 'CSS1Compat' || ieVersion<6 || ieVersion>8 || !xhr) {
+            return
+       }
 
 #site: 
 #  name:
