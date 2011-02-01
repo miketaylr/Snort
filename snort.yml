@@ -304,7 +304,45 @@ site:
        if (doc.compatMode != 'CSS1Compat' || ieVersion<6 || ieVersion>8 || !xhr) {
             return
        }
-
+       
+site:
+  name: vid.ly
+  script: http://m.vid.ly/js/html5.js
+  date: 2011-02-01
+  sniff: |
+       hasQiucktime : function () {
+           ua = navigator.userAgent;
+           version = parseInt(ua.substr(ua.indexOf('Version')).split(" ").shift().split("/").pop());
+           return (ua.indexOf('Safari') != -1 && ua.indexOf('iPhone')==-1  &&  ua.indexOf('iPad') == -1 && ua.indexOf('iPod') == -1 && ua.indexOf("Chrome") == -1 && version < 5); 
+         },
+       hasVideo : function () {
+         return (this.hasPlayType() || this.isMobileOSX());
+       },
+       isIe : function () {
+         ua = navigator.userAgent;
+         return (ua.indexOf('MSIE') != -1 && ua.indexOf('Opera') == -1);
+       }
+       
+site:
+  name: vid.ly
+  script: http://vid.ly/templates/js/video.js
+  date: 2011-02-01
+  sniff: |
+       // Browser & Device Checks
+       VideoJS.isIE = function(){ return !+"\v1"; };
+       VideoJS.isIPad = function(){ return navigator.userAgent.match(/iPad/i) !== null; };
+       VideoJS.isIPhone = function(){ return navigator.userAgent.match(/iPhone/i) !== null; };
+       VideoJS.isIOS = function(){ return VideoJS.isIPhone() || VideoJS.isIPad(); };
+       VideoJS.iOSVersion = function() {
+         var match = navigator.userAgent.match(/OS (\d+)_/i);
+         if (match && match[1]) { return match[1]; }
+       };
+       VideoJS.isAndroid = function(){ return navigator.userAgent.match(/Android/i) !== null; };
+       VideoJS.androidVersion = function() {
+         var match = navigator.userAgent.match(/Android (\d+)\./i);
+         if (match && match[1]) { return match[1]; }
+       };
+  
 #site: 
 #  name:
 #  script:
