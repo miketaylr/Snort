@@ -342,6 +342,47 @@ site:
          var match = navigator.userAgent.match(/Android (\d+)\./i);
          if (match && match[1]) { return match[1]; }
        };
+       
+site: 
+  name: www.assetmanagement.hsbc.com
+  script: http://www.assetmanagement.hsbc.com/gam/control/js/browser_detect.js
+  date: 2011-02-02
+  sniff: |
+       // JavaScript Document
+       var browserName=navigator.appName; 
+       if (browserName=="Netscape")
+       { 
+       
+       }
+       else 
+       { 
+        if (browserName=="Microsoft Internet Explorer")
+        {
+        
+           var browserVer=parseInt(navigator.appVersion); 
+           
+         var ua = navigator.userAgent;
+         var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+         if (re.exec(ua) != null) {
+           rv = parseFloat( RegExp.$1 );
+           
+            if(rv == 6) {
+             document.write('<link href="/gam/control/css/browsers/amg_ie6.css" rel="stylesheet" type="text/css" />'); 
+           } 
+            if(rv == 7) {
+               document.write('<link href="/gam/control/css/browsers/amg_ie7.css" rel="stylesheet" type="text/css" />');
+           }     
+           /* if(rv == 8) {
+              document.getElementById("ie").href = "amg_ie8.css";
+            }*/
+            
+         }  
+        }
+        else
+         {
+           alert("JS Error");
+          }
+       }
   
 #site: 
 #  name:
