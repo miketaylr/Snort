@@ -383,7 +383,35 @@ site:
            alert("JS Error");
           }
        }
-  
+
+site:
+  name: http://kaazing.me/
+  script: http://xmpp.kaazing.me/html5/ByteSocket.js
+  date: 02-07-2011
+  sniff: |
+       var browser=null;
+       if(typeof (ActiveXObject)!="undefined"){
+       browser="ie";
+       }else{
+       if(typeof (window.addEventStream)==="function"){
+       browser="opera";
+       }else{
+       if(navigator.vendor.indexOf("Apple")!=-1){
+       browser="safari";
+       }else{
+       if(navigator.vendor.indexOf("Google")!=-1){
+       browser="chrome";
+       }else{
+       if(navigator.product=="Gecko"&&window.find&&!navigator.savePreferences){
+       browser="firefox";
+       }else{
+       throw new Error("couldn't detect browser");
+       }
+       }
+       }
+       }
+       }
+
 #site: 
 #  name:
 #  script:
