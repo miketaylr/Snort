@@ -494,6 +494,192 @@ site:
        }
        var browseris=new Browseris();
        var bis=browseris;
+       
+site:
+  name: http://www.whatbrowser.org/
+  script: http://www.whatbrowser.org/en/browser.js
+  date: 03-07-2011
+  sniff: |
+        var browser = {
+          set: {
+            
+            "google_chrome": {
+              name: "Google Chrome",
+              match: /Chrome\/(1?[0-9])?\..*? Safari/,
+              instruction: "google_chrome",
+              releases: {
+                "1": {date: "released September 2008 ", version: "1", notes: ''},
+                "2": {date: "released May 2009 ", version: "2", notes: ''},
+                "3": {date: "released September 2009 ", version: "3", notes: ''},
+                "4": {date: "released January 2010 ", version: "4", notes: ''},
+                "6": {date: "released May 2010 ", version: "6", notes: ''},
+                "5": {date: "released May 2010 ", version: "5", notes: ''},
+                "6": {date: "released September 2010 ", version: "6", notes: ''},
+                "6": {date: "released September 2010 ", version: "6", notes: ''},
+                "7": {date: "released September 2010 ", version: "7", notes: ''},
+                "8": {date: "released October 2010 ", version: "8", notes: ''},
+                "9": {date: "released October 2010 ", version: "9", notes: ''},
+                "11": {date: "released February 2011 ", version: "11", notes: ''},
+                "10": {date: "released January 2011 ", version: "10", notes: ''},
+                "12": {date: "released March 2011 ", version: "12", notes: ''},
+                "13": {date: "released April 2011 ", version: "13", notes: ''}
+              }
+            },
+            
+            "internet_explorer_8": {
+              name: "Internet Explorer",
+              match: /MSIE ([8])\..*;|MSIE ([7])\.[0-9.]*;.*Trident.*/,
+              instruction: "internet_explorer_8",
+              releases: {
+                "8": {date: "released March 2009 ", version: "8", notes: ''},
+                "9": {date: "released November 2010 ", version: "9", notes: ''}
+              }
+            },
+            
+            "internet_explorer_7": {
+              name: "Internet Explorer",
+              match: /MSIE ([7])\..*;/,
+              instruction: "internet_explorer_7",
+              releases: {
+                "7": {date: "released October 2006 ", version: "7", notes: ''}
+              }
+            },
+            
+            "internet_explorer_legacy": {
+              name: "Internet Explorer",
+              match: /MSIE ([0-6])\..*;/,
+              instruction: "internet_explorer_legacy",
+              releases: {
+                "6": {date: "released August 2001 ", version: "6", notes: ''},
+                "5": {date: "released March 1999 ", version: "5", notes: ''}
+              }
+            },
+            
+            "firefox": {
+              name: "Firefox",
+              match: /Firefox\/([1-9](?:\.[0-9])?).*/,
+              instruction: "firefox",
+              releases: {
+                "1": {date: "released November 2004 ", version: "1", notes: ''},
+                "2": {date: "released October 2006 ", version: "2", notes: ''},
+                "3": {date: "released June 2008 ", version: "3", notes: ''},
+                "3.5": {date: "released July 2009 ", version: "3.5", notes: ''},
+                "3.6": {date: "released January 2010 ", version: "3.6", notes: ''},
+                "4.0": {date: "released January 2011 ", version: "4", notes: ''}
+              }
+            },
+            
+            "opera_legacy": {
+              name: "Opera",
+              match: /Opera\/([0-8][0-9]?)\..*?|Opera\/([0-9])\.[0-7].*?/,
+              instruction: "opera_legacy",
+              releases: {
+                "9": {date: "released June 2006 ", version: "9", notes: ''},
+                "7": {date: "released January 2003 ", version: "7", notes: ''},
+                "6": {date: "released December 2001 ", version: "6", notes: ''},
+                "8": {date: "released April 2005 ", version: "8", notes: ''},
+                "9.51": {date: "", version: "9.51", notes: ''},
+                "9.52": {date: "", version: "9.52", notes: ''},
+                "9.60": {date: "", version: "9.6", notes: ''},
+                "9.80": {date: "", version: "9.80", notes: ''}
+              }
+            },
+            
+            "safari": {
+              name: "Safari",
+              match: /Version\/([0-9])\..*? Safari/,
+              instruction: "safari",
+              releases: {
+                "3": {date: "released June 2007 ", version: "3", notes: ''},
+                "4": {date: "released June 2009 ", version: "4", notes: ''},
+                "5": {date: "released June 2010 ", version: "5", notes: ''}
+              }
+            },
+            
+            "safari_legacy": {
+              name: "Safari",
+              match: /Safari\/([34]1)/,
+              instruction: "safari_legacy",
+              releases: {
+                "41": {date: "released April 2005 ", version: "2", notes: ''},
+                "31": {date: "released June 2003 ", version: "1", notes: ''}
+              }
+            },
+            
+            "opera": {
+              name: "Opera",
+              match: /Opera\/[0-9]{1,2}\..*?Version\/([0-9]{1,2}\.[0-9]{1,2}).*?/,
+              instruction: "opera",
+              releases: {
+                "10.51": {date: "released March 2010 ", version: "10.51", notes: ''},
+                "10.10": {date: "released November 2009 ", version: "10.10", notes: ''},
+                "10.60": {date: "released June 2010 ", version: "10.6", notes: ''},
+                "10.52": {date: "released April 2010 ", version: "10.52", notes: ''},
+                "10.00": {date: "released September 2009 ", version: "10.00", notes: ''},
+                "10.50": {date: "released March 2010 ", version: "10.50", notes: ''},
+                "10.53": {date: "released April 2010 ", version: "10.53", notes: ''},
+                "10.60": {date: "released June 2010 ", version: "10.6", notes: ''},
+                "10.63": {date: "released October 2010 ", version: "10.63", notes: ''},
+                "11": {date: "released October 2010 ", version: "11", notes: ''},
+                "9.52": {date: "", version: "9.52", notes: ''},
+                "9.8": {date: "", version: "9.8", notes: ''},
+                "9.51": {date: "", version: "9.51", notes: ''},
+                "9.60": {date: "", version: "9.60", notes: ''},
+                "11.01": {date: "released January 2011 ", version: "11", notes: ''}
+              }
+            }
+            
+          },
+          
+          platform: navigator.userAgent.match(/Macintosh/) ? 'Mac' : 'PC',
+          possibilities: [
+            'google_chrome',
+            'internet_explorer_8',
+            'internet_explorer_7',
+            'internet_explorer_legacy',
+            'firefox',
+            'opera_legacy',
+            'safari',
+            'safari_legacy',
+            'opera'
+          ],
+          
+          detect: function() {
+            var len = this.possibilities.length;
+            for (i = 0; i < len; i++) {
+              var k = this.possibilities[i];
+              if (this.set.hasOwnProperty(k) && (this.set[k].version = navigator.userAgent.match(this.set[k].match))) {
+                var matching = this.set[k];
+                
+                // hack for ie8 ACTING LIKE ie7
+                if (k == 'internet_explorer_8' && !matching.version[1]) {
+                  matching.version[1] = '8';
+                }
+                if (!matching.releases[matching.version[1]]){
+                    return null;
+                }
+          	    release = matching.releases[matching.version[1]];
+        	    matching.version = ['', release.version];
+          	    matching.releaseDate = release.date;
+                  matching.notes = release.notes;
+                  
+        	    return matching;
+              }
+            }
+            return null;
+          },
+          
+          error_message: function(){
+              if ('None'!='None'){
+                  return 'None';
+              } else if ('None'!='None') {
+                  return 'None';
+              } else{
+                  return "Sorry, we couldn't recognize your browser. The What Browser team has been notified.";
+              };
+          }
+        };
+        
 #site: 
 #  name:
 #  script:
