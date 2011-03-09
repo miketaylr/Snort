@@ -680,7 +680,37 @@ site:
           }
         };
         
-#site: 
+site: 
+  name: www.3dcontentcentral.com
+  script: http://www.3dcontentcentral.com/js/base.js
+  date: 03-09-2011
+  sniff: |
+    /*Detect of current browser like server's method*/
+    eBrowserType={
+        Chrome_v1:'Chrome_v1',
+        Chrome_v2:'Chrome_v2',
+        FF_v2:'FF_v2',
+        FF_v3:'FF_v3',
+        IE_v6:'IE_v6',
+        IE_v7:'IE_v7',
+        IE_v8:'IE_v8',
+        Other:'Other'
+    }
+    function GetBrowserType()
+    {
+    	var ua=navigator.userAgent.toUpperCase();
+    
+    	if (ua.indexOf("CHROME/1.") > -1) return eBrowserType.Chrome_v1;
+    	if (ua.indexOf("CHROME/2.") > -1) return eBrowserType.Chrome_v2;
+        if (ua.indexOf("FIREFOX/2.")>-1) return eBrowserType.FF_v2;
+        if (ua.indexOf("FIREFOX/3.")>-1) return eBrowserType.FF_v3;
+        if (ua.indexOf("MSIE 6.")>-1) return eBrowserType.IE_v6;
+        if (ua.indexOf("MSIE 7.")>-1) return eBrowserType.IE_v7;
+        if (ua.indexOf("MSIE 8.")>-1) return eBrowserType.IE_v8;
+        return eBrowserType.Other;
+    }
+       
+#site:
 #  name:
 #  script:
 #  date:
