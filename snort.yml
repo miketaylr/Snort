@@ -709,7 +709,53 @@ site:
         if (ua.indexOf("MSIE 8.")>-1) return eBrowserType.IE_v8;
         return eBrowserType.Other;
     }
-       
+
+site:
+  name: http://lifestream.icq.com/settings
+  script: http://c.icq.com/js/header_c.js
+  date: 4-19-2011
+  sniff: |
+    // Browser Detection
+    var detect = navigator.userAgent.toLowerCase();
+    var gl_os,gl_browser,gl_version,gl_total,thestring;
+
+    if (checkIt('konqueror'))
+    {
+    	gl_browser = "Konqueror";
+    	gl_os = "Linux";
+    }
+    else if (checkIt('safari')) gl_browser = "Safari"
+    else if (checkIt('omniweb')) gl_browser = "OmniWeb"
+    else if (checkIt('opera')) gl_browser = "Opera"
+    else if (checkIt('webtv')) gl_browser = "WebTV";
+    else if (checkIt('icab')) gl_browser = "iCab"
+    else if (checkIt('msie')) gl_browser = "Internet Explorer"
+    else if (!checkIt('compatible'))
+    {
+    	gl_browser = "Netscape Navigator"
+    	gl_version = detect.charAt(8);
+    }
+    else gl_browser = "An unknown browser";
+
+    if (!gl_version) gl_version = detect.charAt(place + thestring.length);
+
+    if (!gl_os)
+    {
+    	if (checkIt('linux')) gl_os = "Linux";
+    	else if (checkIt('x11')) gl_os = "Unix";
+    	else if (checkIt('mac')) gl_os = "Mac"
+    	else if (checkIt('win')) gl_os = "Windows"
+    	else os = "an unknown operating system";
+    }
+
+    function checkIt(string)
+    {
+    	place = detect.indexOf(string) + 1;
+    	thestring = string;
+    	return place;
+    }
+    // End Browser Detection.
+
 #site:
 #  name:
 #  script:
