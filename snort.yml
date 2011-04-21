@@ -713,7 +713,7 @@ site:
 site:
   name: http://lifestream.icq.com/settings
   script: http://c.icq.com/js/header_c.js
-  date: 4-19-2011
+  date: 04-19-2011
   sniff: |
     // Browser Detection
     var detect = navigator.userAgent.toLowerCase();
@@ -755,6 +755,37 @@ site:
     	return place;
     }
     // End Browser Detection.
+    
+site:
+  name: http://sapid.sourceforge.net/ssetest/
+  script: (inline)
+  date: 04-20-2011
+  sniff: |
+       /**
+        * Detects which sort of SSE support to apply if to apply it at all
+        * @return user agent type
+        */
+       var detectUAgent = function() {
+           if (navigator.appName == "Opera" && -1 !== navigator.appVersion.indexOf("9.")) {
+               log("Opera browser detected. " + INIT_MESSAGE);
+               return 'opera';
+           } else
+           if (-1 !== navigator.appVersion.indexOf("AppleWebKit/5")) {
+               log("Apparently, your browser supports SSE. " + INIT_MESSAGE);
+               return 'webkit';
+           } else
+           if (navigator.appName == "Netscape" && -1 !== navigator.appVersion.indexOf("5.0")) {
+               log("Your browser does not support SSE yet natively, but you can see here emulation. " + INIT_MESSAGE);
+               return 'webkit';
+           } else
+           if (undefined !== window['EventSource']) {
+               log("I'm not sure about your browser, but let's try. " + INIT_MESSAGE);
+               return 'webkit';
+           }  else {
+               log(FAIL_MESSAGE);
+               return false;
+           }
+       };
 
 #site:
 #  name:
