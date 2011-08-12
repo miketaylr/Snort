@@ -786,6 +786,117 @@ site:
                return false;
            }
        };
+       
+site:
+  name: USPS
+  script: https://sss-web.usps.com/cns/jscript/windows.js
+  date: 08-12-2011
+  sniff: |
+       <!--
+       // ----------------------------------------------------------------------------------------------------------------------------------------
+       // This section contains miscellaneous browser related routines and variables.
+       // You DON'T need to make any changes to this file.
+       // ----------------------------------------------------------------------------------------------------------------------------------------
+
+       var browserName      = "";
+       var browserVersion   = "";
+       var browserWidth     = 0;
+       var browserHeight    = 0;
+       var browserSupported = true;
+
+          detectBrowser ();
+          detectBrowserSize ();
+          testBrowserVersion ();
+
+       // ----------------------------------------------------------------------------------------------------------------------------------------
+       // detects browser name and version
+       // ----------------------------------------------------------------------------------------------------------------------------------------
+
+       function detectBrowser ()
+       {
+       	browserName = navigator.appName;
+       
+       	if (navigator.userAgent.indexOf ("Opera") > -1)
+       	{
+       		browserName = "Opera";
+       		var index = navigator.userAgent.indexOf ("Opera");
+       		browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 5));
+       	}
+
+       	else if (navigator.userAgent.indexOf ("MSIE") > -1)
+       	{
+       		browserName = "Internet Explorer";
+       		var index = navigator.userAgent.indexOf ("MSIE");
+       		browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 4));
+       	}
+
+       	else if (navigator.vendor == "Netscape6" || navigator.vendor == "Netscape")
+       	{
+       		browserName = "Netscape";
+       		browserVersion = navigator.vendorSub;
+       	}
+
+       	else if (navigator.userAgent.indexOf ("Gecko") > -1)
+       	{
+       		browserName = "Mozilla";
+       		var index = navigator.userAgent.indexOf ("rv:");
+       		browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 3));
+       	}
+
+       	else if (navigator.appName.indexOf ("Netscape") != -1)
+       	{
+       		browserName = "Netscape";
+       		var index = navigator.appVersion.indexOf (" ");
+       		browserVersion = navigator.appVersion.substring (0, index);
+       	}
+       }
+
+       // ----------------------------------------------------------------------------------------------------------------------------------------
+       // extracts browser version
+       // ----------------------------------------------------------------------------------------------------------------------------------------
+
+       function extractBrowserVersion (browserVersion)
+       {
+       	browserVersion = trim (browserVersion);
+
+       	index = browserVersion.indexOf (";");
+       	if (index > -1)
+       		browserVersion = browserVersion.substring (0, index);
+       	else
+       	{
+       		index = browserVersion.indexOf (")");
+       		if (index > -1)
+       			browserVersion = browserVersion.substring (0, index);
+       		else
+       		{
+       			index = browserVersion.indexOf (" ");
+       			if (index > -1)
+       				browserVersion = browserVersion.substring (0, index);
+       		}
+       	}
+
+       	return browserVersion;
+       }
+
+       // ----------------------------------------------------------------------------------------------------------------------------------------
+       // tests browser name and version
+       // ----------------------------------------------------------------------------------------------------------------------------------------
+
+       function testBrowserVersion ()
+       {
+       	if (! ((browserName == "Internet Explorer" && browserVersion >= "4.0") ||
+       	       (browserName == "Netscape"          && browserVersion >= "4.0") ||
+       	       (browserName == "Mozilla"           && browserVersion >= "1.0") ||
+       	       (browserName == "Opera"             && browserVersion >= "5.0")))
+       	{
+       		browserSupported = false;
+       		alert ("Warning, you are using " + browserName + " Version " + browserVersion + "\n"
+       			+ "The recommended browsers to view this page are:\n"
+       			+ "- Internet Explorer 4.0 or better\n"
+       			+ "- Netscape 4.0 or better\n"
+       		);
+       	}
+       }
 
 #site:
 #  name:
