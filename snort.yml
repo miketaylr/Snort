@@ -446,51 +446,51 @@ site:
   date: 03-02-2011
   sniff: |
        function Browseris () {
-       	var agt=navigator.userAgent.toLowerCase();
-       	this.osver=1.0;
-       	if (agt)
-       	{
-       		var stOSVer=agt.substring(agt.indexOf("windows ")+11);
-       		this.osver=parseFloat(stOSVer);
-       	}
-       	this.major=parseInt(navigator.appVersion);
-       	this.nav=((agt.indexOf('mozilla')!=-1)&&((agt.indexOf('spoofer')==-1) && (agt.indexOf('compatible')==-1)));
-       	this.nav6=this.nav && (this.major==5);
-       	this.nav6up=this.nav && (this.major >=5);
-       	this.nav7up=false;
-       	if (this.nav6up)
-       	{
-       		var navIdx=agt.indexOf("netscape/");
-       		if (navIdx >=0 )
-       			this.nav7up=parseInt(agt.substring(navIdx+9)) >=7;
-       	}
-       	this.ie=(agt.indexOf("msie")!=-1);
-       	this.aol=this.ie && agt.indexOf(" aol ")!=-1;
-       	if (this.ie)
-       		{
-       		var stIEVer=agt.substring(agt.indexOf("msie ")+5);
-       		this.iever=parseInt(stIEVer);
-       		this.verIEFull=parseFloat(stIEVer);
-       		}
-       	else
-       		this.iever=0;
-       	this.ie4up=this.ie && (this.major >=4);
-       	this.ie5up=this.ie && (this.iever >=5);
-       	this.ie55up=this.ie && (this.verIEFull >=5.5);
-       	this.ie6up=this.ie && (this.iever >=6);
-       	this.winnt=((agt.indexOf("winnt")!=-1)||(agt.indexOf("windows nt")!=-1));
-       	this.win32=((this.major >=4) && (navigator.platform=="Win32")) ||
-       		(agt.indexOf("win32")!=-1) || (agt.indexOf("32bit")!=-1);
-       	this.mac=(agt.indexOf("mac")!=-1);
-       	this.w3c=this.nav6up;
-       	this.safari=(agt.indexOf("safari")!=-1);
-       	this.safari125up=false;
-       	if (this.safari && this.major >=5)
-       	{
-       		var navIdx=agt.indexOf("safari/");
-       		if (navIdx >=0)
-       			this.safari125up=parseInt(agt.substring(navIdx+7)) >=125;
-       	}
+         var agt=navigator.userAgent.toLowerCase();
+         this.osver=1.0;
+         if (agt)
+         {
+           var stOSVer=agt.substring(agt.indexOf("windows ")+11);
+           this.osver=parseFloat(stOSVer);
+         }
+         this.major=parseInt(navigator.appVersion);
+         this.nav=((agt.indexOf('mozilla')!=-1)&&((agt.indexOf('spoofer')==-1) && (agt.indexOf('compatible')==-1)));
+         this.nav6=this.nav && (this.major==5);
+         this.nav6up=this.nav && (this.major >=5);
+         this.nav7up=false;
+         if (this.nav6up)
+         {
+           var navIdx=agt.indexOf("netscape/");
+           if (navIdx >=0 )
+             this.nav7up=parseInt(agt.substring(navIdx+9)) >=7;
+         }
+         this.ie=(agt.indexOf("msie")!=-1);
+         this.aol=this.ie && agt.indexOf(" aol ")!=-1;
+         if (this.ie)
+           {
+           var stIEVer=agt.substring(agt.indexOf("msie ")+5);
+           this.iever=parseInt(stIEVer);
+           this.verIEFull=parseFloat(stIEVer);
+           }
+         else
+           this.iever=0;
+         this.ie4up=this.ie && (this.major >=4);
+         this.ie5up=this.ie && (this.iever >=5);
+         this.ie55up=this.ie && (this.verIEFull >=5.5);
+         this.ie6up=this.ie && (this.iever >=6);
+         this.winnt=((agt.indexOf("winnt")!=-1)||(agt.indexOf("windows nt")!=-1));
+         this.win32=((this.major >=4) && (navigator.platform=="Win32")) ||
+           (agt.indexOf("win32")!=-1) || (agt.indexOf("32bit")!=-1);
+         this.mac=(agt.indexOf("mac")!=-1);
+         this.w3c=this.nav6up;
+         this.safari=(agt.indexOf("safari")!=-1);
+         this.safari125up=false;
+         if (this.safari && this.major >=5)
+         {
+           var navIdx=agt.indexOf("safari/");
+           if (navIdx >=0)
+             this.safari125up=parseInt(agt.substring(navIdx+7)) >=125;
+         }
        }
        var browseris=new Browseris();
        var bis=browseris;
@@ -658,12 +658,12 @@ site:
                 if (!matching.releases[matching.version[1]]){
                     return null;
                 }
-          	    release = matching.releases[matching.version[1]];
-        	    matching.version = ['', release.version];
-          	    matching.releaseDate = release.date;
+                release = matching.releases[matching.version[1]];
+              matching.version = ['', release.version];
+                matching.releaseDate = release.date;
                   matching.notes = release.notes;
                   
-        	    return matching;
+              return matching;
               }
             }
             return null;
@@ -698,10 +698,10 @@ site:
     }
     function GetBrowserType()
     {
-    	var ua=navigator.userAgent.toUpperCase();
+      var ua=navigator.userAgent.toUpperCase();
     
-    	if (ua.indexOf("CHROME/1.") > -1) return eBrowserType.Chrome_v1;
-    	if (ua.indexOf("CHROME/2.") > -1) return eBrowserType.Chrome_v2;
+      if (ua.indexOf("CHROME/1.") > -1) return eBrowserType.Chrome_v1;
+      if (ua.indexOf("CHROME/2.") > -1) return eBrowserType.Chrome_v2;
         if (ua.indexOf("FIREFOX/2.")>-1) return eBrowserType.FF_v2;
         if (ua.indexOf("FIREFOX/3.")>-1) return eBrowserType.FF_v3;
         if (ua.indexOf("MSIE 6.")>-1) return eBrowserType.IE_v6;
@@ -718,11 +718,11 @@ site:
     // Browser Detection
     var detect = navigator.userAgent.toLowerCase();
     var gl_os,gl_browser,gl_version,gl_total,thestring;
-
+    
     if (checkIt('konqueror'))
     {
-    	gl_browser = "Konqueror";
-    	gl_os = "Linux";
+      gl_browser = "Konqueror";
+      gl_os = "Linux";
     }
     else if (checkIt('safari')) gl_browser = "Safari"
     else if (checkIt('omniweb')) gl_browser = "OmniWeb"
@@ -732,27 +732,27 @@ site:
     else if (checkIt('msie')) gl_browser = "Internet Explorer"
     else if (!checkIt('compatible'))
     {
-    	gl_browser = "Netscape Navigator"
-    	gl_version = detect.charAt(8);
+      gl_browser = "Netscape Navigator"
+      gl_version = detect.charAt(8);
     }
     else gl_browser = "An unknown browser";
-
+    
     if (!gl_version) gl_version = detect.charAt(place + thestring.length);
-
+    
     if (!gl_os)
     {
-    	if (checkIt('linux')) gl_os = "Linux";
-    	else if (checkIt('x11')) gl_os = "Unix";
-    	else if (checkIt('mac')) gl_os = "Mac"
-    	else if (checkIt('win')) gl_os = "Windows"
-    	else os = "an unknown operating system";
+      if (checkIt('linux')) gl_os = "Linux";
+      else if (checkIt('x11')) gl_os = "Unix";
+      else if (checkIt('mac')) gl_os = "Mac"
+      else if (checkIt('win')) gl_os = "Windows"
+      else os = "an unknown operating system";
     }
-
+    
     function checkIt(string)
     {
-    	place = detect.indexOf(string) + 1;
-    	thestring = string;
-    	return place;
+      place = detect.indexOf(string) + 1;
+      thestring = string;
+      return place;
     }
     // End Browser Detection.
     
@@ -792,111 +792,164 @@ site:
   script: https://sss-web.usps.com/cns/jscript/windows.js
   date: 08-12-2011
   sniff: |
-       <!--
-       // ----------------------------------------------------------------------------------------------------------------------------------------
-       // This section contains miscellaneous browser related routines and variables.
-       // You DON'T need to make any changes to this file.
-       // ----------------------------------------------------------------------------------------------------------------------------------------
-
-       var browserName      = "";
-       var browserVersion   = "";
-       var browserWidth     = 0;
-       var browserHeight    = 0;
-       var browserSupported = true;
-
-          detectBrowser ();
-          detectBrowserSize ();
-          testBrowserVersion ();
-
-       // ----------------------------------------------------------------------------------------------------------------------------------------
-       // detects browser name and version
-       // ----------------------------------------------------------------------------------------------------------------------------------------
-
-       function detectBrowser ()
+    <!--
+    // ----------------------------------------------------------------------------------------------------------------------------------------
+    // This section contains miscellaneous browser related routines and variables.
+    // You DON'T need to make any changes to this file.
+    // ----------------------------------------------------------------------------------------------------------------------------------------
+      
+    var browserName      = "";
+    var browserVersion   = "";
+    var browserWidth     = 0;
+    var browserHeight    = 0;
+    var browserSupported = true;
+    
+    detectBrowser ();
+    detectBrowserSize ();
+    testBrowserVersion ();
+    
+    // ----------------------------------------------------------------------------------------------------------------------------------------
+    // detects browser name and version
+    // ----------------------------------------------------------------------------------------------------------------------------------------
+      
+    function detectBrowser ()
+    {
+     browserName = navigator.appName;
+    
+     if (navigator.userAgent.indexOf ("Opera") > -1)
+     {
+       browserName = "Opera";
+       var index = navigator.userAgent.indexOf ("Opera");
+       browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 5));
+     }
+     
+     else if (navigator.userAgent.indexOf ("MSIE") > -1)
+     {
+       browserName = "Internet Explorer";
+       var index = navigator.userAgent.indexOf ("MSIE");
+       browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 4));
+     }
+     
+     else if (navigator.vendor == "Netscape6" || navigator.vendor == "Netscape")
+     {
+       browserName = "Netscape";
+       browserVersion = navigator.vendorSub;
+     }
+     
+     else if (navigator.userAgent.indexOf ("Gecko") > -1)
+     {
+       browserName = "Mozilla";
+       var index = navigator.userAgent.indexOf ("rv:");
+       browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 3));
+     }
+   
+     else if (navigator.appName.indexOf ("Netscape") != -1)
+     {
+       browserName = "Netscape";
+       var index = navigator.appVersion.indexOf (" ");
+       browserVersion = navigator.appVersion.substring (0, index);
+     }
+   }
+   
+   // ----------------------------------------------------------------------------------------------------------------------------------------
+   // extracts browser version
+   // ----------------------------------------------------------------------------------------------------------------------------------------
+   
+   function extractBrowserVersion (browserVersion)
+   {
+     browserVersion = trim (browserVersion);
+   
+     index = browserVersion.indexOf (";");
+     if (index > -1)
+       browserVersion = browserVersion.substring (0, index);
+     else
+     {
+       index = browserVersion.indexOf (")");
+       if (index > -1)
+         browserVersion = browserVersion.substring (0, index);
+       else
        {
-       	browserName = navigator.appName;
+         index = browserVersion.indexOf (" ");
+         if (index > -1)
+           browserVersion = browserVersion.substring (0, index);
+       }
+     }
+   
+     return browserVersion;
+   }
+   
+   // ----------------------------------------------------------------------------------------------------------------------------------------
+   // tests browser name and version
+   // ----------------------------------------------------------------------------------------------------------------------------------------
+   
+   function testBrowserVersion ()
+   {
+     if (! ((browserName == "Internet Explorer" && browserVersion >= "4.0") ||
+            (browserName == "Netscape"          && browserVersion >= "4.0") ||
+            (browserName == "Mozilla"           && browserVersion >= "1.0") ||
+            (browserName == "Opera"             && browserVersion >= "5.0")))
+     {
+       browserSupported = false;
+       alert ("Warning, you are using " + browserName + " Version " + browserVersion + "\n"
+         + "The recommended browsers to view this page are:\n"
+         + "- Internet Explorer 4.0 or better\n"
+         + "- Netscape 4.0 or better\n"
+       );
+     }
+   }
        
-       	if (navigator.userAgent.indexOf ("Opera") > -1)
-       	{
-       		browserName = "Opera";
-       		var index = navigator.userAgent.indexOf ("Opera");
-       		browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 5));
-       	}
-
-       	else if (navigator.userAgent.indexOf ("MSIE") > -1)
-       	{
-       		browserName = "Internet Explorer";
-       		var index = navigator.userAgent.indexOf ("MSIE");
-       		browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 4));
-       	}
-
-       	else if (navigator.vendor == "Netscape6" || navigator.vendor == "Netscape")
-       	{
-       		browserName = "Netscape";
-       		browserVersion = navigator.vendorSub;
-       	}
-
-       	else if (navigator.userAgent.indexOf ("Gecko") > -1)
-       	{
-       		browserName = "Mozilla";
-       		var index = navigator.userAgent.indexOf ("rv:");
-       		browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 3));
-       	}
-
-       	else if (navigator.appName.indexOf ("Netscape") != -1)
-       	{
-       		browserName = "Netscape";
-       		var index = navigator.appVersion.indexOf (" ");
-       		browserVersion = navigator.appVersion.substring (0, index);
-       	}
-       }
-
-       // ----------------------------------------------------------------------------------------------------------------------------------------
-       // extracts browser version
-       // ----------------------------------------------------------------------------------------------------------------------------------------
-
-       function extractBrowserVersion (browserVersion)
-       {
-       	browserVersion = trim (browserVersion);
-
-       	index = browserVersion.indexOf (";");
-       	if (index > -1)
-       		browserVersion = browserVersion.substring (0, index);
-       	else
-       	{
-       		index = browserVersion.indexOf (")");
-       		if (index > -1)
-       			browserVersion = browserVersion.substring (0, index);
-       		else
-       		{
-       			index = browserVersion.indexOf (" ");
-       			if (index > -1)
-       				browserVersion = browserVersion.substring (0, index);
-       		}
-       	}
-
-       	return browserVersion;
-       }
-
-       // ----------------------------------------------------------------------------------------------------------------------------------------
-       // tests browser name and version
-       // ----------------------------------------------------------------------------------------------------------------------------------------
-
-       function testBrowserVersion ()
-       {
-       	if (! ((browserName == "Internet Explorer" && browserVersion >= "4.0") ||
-       	       (browserName == "Netscape"          && browserVersion >= "4.0") ||
-       	       (browserName == "Mozilla"           && browserVersion >= "1.0") ||
-       	       (browserName == "Opera"             && browserVersion >= "5.0")))
-       	{
-       		browserSupported = false;
-       		alert ("Warning, you are using " + browserName + " Version " + browserVersion + "\n"
-       			+ "The recommended browsers to view this page are:\n"
-       			+ "- Internet Explorer 4.0 or better\n"
-       			+ "- Netscape 4.0 or better\n"
-       		);
-       	}
-       }
+site:
+  name: jcpenney.com
+  script: http://www.jcpenney.com/jcp/Javascript/XBase.js?Version=11172010
+  date: 08-24-2011
+  sniff: |
+    function Browser() {
+      var BrowserName;
+      var usrAgent;
+      var pos;
+    
+      this.IEBrowser    = false;
+      this.MozBrowser    = false;
+      this.version = null;
+      this.MACOS = false;
+      usrAgent = navigator.userAgent;
+    
+    
+     //OSTest
+     OSName = "Mac";
+       if ((pos = usrAgent.indexOf(OSName)) >= 0) 
+      {
+        this.MACOS = true;
+      }
+    
+      BrowserName = "MSIE";
+      if ((pos = usrAgent.indexOf(BrowserName)) >= 0) 
+      {
+        this.IEBrowser = true;
+        this.version = parseFloat(usrAgent.substr(pos + BrowserName.length));
+        return;
+      }
+    
+      BrowserName = "Netscape6/";
+      if ((pos = usrAgent.indexOf(BrowserName)) >= 0) 
+      {
+        this.MozBrowser = true;
+        this.version = parseFloat(usrAgent.substr(pos + BrowserName.length));
+        return;
+      }
+    
+      // Treat any other "Gecko" browser as NS 6.1.
+    
+      BrowserName = "Gecko";
+      if ((pos = usrAgent.indexOf(BrowserName)) >= 0) 
+      {
+        this.MozBrowser = true;
+        this.version = 6.1;
+        return;
+      }
+    
+    
+    }
 
 #site:
 #  name:
