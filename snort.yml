@@ -985,6 +985,19 @@ site:
        return Xinha.is_gecko||(Xinha.is_opera&&Xinha.opera_version>=9.1)||Xinha.ie_version>=5.5;
        };
        Xinha.isSupportedBrowser=Xinha.checkSupportedBrowser();
+       
+site:
+  name: pcworld.com
+  script: http://ftp.pcworld.com/pub/screencams/ascii-matrix.html
+  date: 09-19-2011
+  sniff: |
+       /******* browser detect ******/
+       
+       with(navigator) {
+        Browser=appName;
+        Version=parseInt(appVersion.charAt(0));
+       } //document.write(Browser+" "+Version+" : ");
+       
 #site:
 #  name:
 #  script:
