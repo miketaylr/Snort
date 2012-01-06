@@ -1102,6 +1102,45 @@ site:
                }
            }
        })();
+       
+site:
+  name: http://2010.usopen.org/en_US/scores/stats/day14/1408dss.html
+  script: (inline)
+  date: 01/06/2012
+  sniff: |
+  //display old browser message
+  function BrowserCheck() {
+  var b = navigator.appName;
+  if (b=="Netscape") this.b = "ns";
+  else if (b=="Microsoft Internet Explorer") this.b = "ie";
+  else if (b=="Opera") this.b = "op";
+  else this.b = b;
+  this.v = parseInt(navigator.appVersion);
+  this.ns = (this.b=="ns" && this.v==4);
+  this.ns4 = (this.b=="ns" && this.v>=4 && this.v<5);
+  this.ns5 = (this.b=="ns" && this.v>=5);
+  this.op = (this.b=="op" && this.v>=4);
+  this.op5 = (this.b=="op" && this.v>=5);
+  this.ie = (this.b=="ie" && this.v>=4);
+  this.ie4 = (navigator.userAgent.indexOf('MSIE 4')>0);
+  this.ie5 = (navigator.userAgent.indexOf('MSIE 5')>0);
+  this.ie6 = (navigator.userAgent.indexOf('MSIE 6')>0);
+  if (this.ie5) this.v = 5;
+  this.min = (this.ns||this.ie);
+  }
+  is = new BrowserCheck();
+  var isNav = false;
+  var isDom = false;
+  var isIE = false;
+  var isOp = false;
+  if (is.ns4){ isNav = true; }
+  if (is.ie4 || is.ie5 || is.ie6){ isIE = true; }
+  if (is.op5){ isOp = true; }
+  if (is.ns5){ isDom = true; }
+  if (!isIE && !isNav && !isDom){
+  document.write("You need a 4.0+ browser");
+  }
+    
 #site:
 #  name:
 #  script:
