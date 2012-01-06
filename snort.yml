@@ -997,7 +997,111 @@ site:
         Browser=appName;
         Version=parseInt(appVersion.charAt(0));
        } //document.write(Browser+" "+Version+" : ");
-       
+
+site:
+  name: globo.com
+  script: http://s.glbimg.com/en/hm/media/CACHE/js/31c83fbe47be.js
+  date: 01-06-2012
+  sniff: |
+       var whoami = {
+           userAgent: navigator.userAgent.toLowerCase(),
+           browserPlatform: navigator.platform.toLowerCase(),
+           platform: {
+               name: ''
+           },
+           browser: {
+               name: ''
+           },
+           modules: {
+               platform: [],
+               browser: []
+           },
+           type: {
+               platform: 'platform',
+               browser: 'browser'
+           },
+           register: function(type, module) {
+               this.modules[type].push(module);
+           },
+           detect: function(collection, property) {
+               for (var i = 0; i < collection.length; i++) {
+                   collection[i].call(this);
+               }
+           },
+           identify: function() {
+               this.detect(this.modules.platform, 'platform');
+               this.detect(this.modules.browser, 'browser');
+           },
+           setPlatformName: function(name) {
+               this.platform.name = name;
+               this.platform[name] = true;
+           },
+           helpers: {
+               platform: {
+                   identifyFromPlatform: function(pattern, name) {
+                       var self = whoami;
+                       return function() {
+                           if (pattern.test(self.browserPlatform)) {
+                               self.setPlatformName(name);
+                           }
+                       };
+                   },
+                   identifyFromUserAgent: function(pattern, name) {
+                       var self = whoami;
+                       return function() {
+                           if (pattern.test(self.userAgent)) {
+                               self.setPlatformName(name);
+                           }
+                       };
+                   }
+               }
+           }
+       };
+       whoami.register(whoami.type.platform, whoami.helpers.platform.identifyFromPlatform(/mac/, 'mac'));
+       whoami.register(whoami.type.platform, whoami.helpers.platform.identifyFromPlatform(/linux/, 'linux'));
+       whoami.register(whoami.type.platform, whoami.helpers.platform.identifyFromPlatform(/win/, 'windows'));
+       whoami.register(whoami.type.platform, whoami.helpers.platform.identifyFromUserAgent(/ipad/, 'ipad'));
+       whoami.register(whoami.type.platform, whoami.helpers.platform.identifyFromUserAgent(/android/, 'android'));
+       whoami.register(whoami.type.platform, whoami.helpers.platform.identifyFromUserAgent(/iphone/, 'iphone'));
+       whoami.register(whoami.type.platform, whoami.helpers.platform.identifyFromUserAgent(/ipod/, 'ipod'));
+       var glb = glb || {};
+       glb.cookie = {
+           create: function(name, value, minutes, domain) {
+               if (minutes) {
+                   var date = new Date();
+                   date.setTime(date.getTime() + (minutes * 60 * 1000));
+                   var expires = '; expires=' + date.toGMTString();
+               } else {
+                   var expires = '';
+               }
+               domain = (domain) ? '; domain=' + domain: '';
+               document.cookie = name + '=' + value + expires + '; path=/' + domain;
+           },
+           read: function(name) {
+               var nameEQ = name + '=';
+               var ca = document.cookie.split(';');
+               for (var i = 0; i < ca.length; i++) {
+                   var c = ca[i];
+                   while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                   if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+               }
+               return null;
+           },
+           erase: function(name) {
+               this.create(name, '', -1);
+           }
+       }; (function() {
+           whoami.identify();
+           var platform = whoami.platform.name;
+           var isDesktop = (/^(?:mac|windows|linux|ipad)$/).test(platform);
+           if (!isDesktop && !glb.cookie.read('original-page')) {
+               if ((/^(?:android|iphone|ipod)$/).test(platform)) {
+                   window.location = 'http://m.globo.com/touchphone/';
+               } else {
+                   window.location = 'http://m.globo.com/standard/';
+               }
+           }
+       })();
 #site:
 #  name:
 #  script:
