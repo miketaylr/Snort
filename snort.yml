@@ -1259,6 +1259,26 @@ site:
       }
       return merged;
   };
+
+site:
+  name: Wonderful Pistacio Chrome Birds
+  script: http://getcrackin.angrybirds.com/
+  date: 01-26-2012
+  inline: |
+       complete : function () {
+            if (!Modernizr.hasEvent("touchmove", window)) { // not mobile
+              if (Modernizr.testProp('-webkit-box-shadow')) { // is WebKit
+                $("#roadblock").addClass("loading");
+                $("head").append('<link rel="stylesheet" href="http://wac.5DC0.edgecastcdn.net/805DC0/site/static/css/style.css" />');
+                GetCrackin.init();
+              } else {
+                $("#roadblock").addClass("chrome");
+              }
+            } else {
+              $("#roadblock").addClass("mobile");
+            }
+          }
+  
 #site:
 #  name:
 #  script:
