@@ -786,118 +786,116 @@ site:
                return false;
            }
        };
-       
+
 site:
   name: USPS
   script: https://sss-web.usps.com/cns/jscript/windows.js
   date: 08-12-2011
   sniff: |
-    <!--
-    // ----------------------------------------------------------------------------------------------------------------------------------------
-    // This section contains miscellaneous browser related routines and variables.
-    // You DON'T need to make any changes to this file.
-    // ----------------------------------------------------------------------------------------------------------------------------------------
+      // ----------------------------------------------------------------------------------------------------------------------------------------
+      // This section contains miscellaneous browser related routines and variables.
+      // You DON'T need to make any changes to this file.
+      // ----------------------------------------------------------------------------------------------------------------------------------------
+        
+      var browserName      = "";
+      var browserVersion   = "";
+      var browserWidth     = 0;
+      var browserHeight    = 0;
+      var browserSupported = true;
       
-    var browserName      = "";
-    var browserVersion   = "";
-    var browserWidth     = 0;
-    var browserHeight    = 0;
-    var browserSupported = true;
-    
-    detectBrowser ();
-    detectBrowserSize ();
-    testBrowserVersion ();
-    
-    // ----------------------------------------------------------------------------------------------------------------------------------------
-    // detects browser name and version
-    // ----------------------------------------------------------------------------------------------------------------------------------------
+      detectBrowser ();
+      detectBrowserSize ();
+      testBrowserVersion ();
       
-    function detectBrowser ()
-    {
-     browserName = navigator.appName;
-    
-     if (navigator.userAgent.indexOf ("Opera") > -1)
-     {
-       browserName = "Opera";
-       var index = navigator.userAgent.indexOf ("Opera");
-       browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 5));
-     }
-     
-     else if (navigator.userAgent.indexOf ("MSIE") > -1)
-     {
-       browserName = "Internet Explorer";
-       var index = navigator.userAgent.indexOf ("MSIE");
-       browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 4));
-     }
-     
-     else if (navigator.vendor == "Netscape6" || navigator.vendor == "Netscape")
-     {
-       browserName = "Netscape";
-       browserVersion = navigator.vendorSub;
-     }
-     
-     else if (navigator.userAgent.indexOf ("Gecko") > -1)
-     {
-       browserName = "Mozilla";
-       var index = navigator.userAgent.indexOf ("rv:");
-       browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 3));
-     }
-   
-     else if (navigator.appName.indexOf ("Netscape") != -1)
-     {
-       browserName = "Netscape";
-       var index = navigator.appVersion.indexOf (" ");
-       browserVersion = navigator.appVersion.substring (0, index);
-     }
-   }
-   
-   // ----------------------------------------------------------------------------------------------------------------------------------------
-   // extracts browser version
-   // ----------------------------------------------------------------------------------------------------------------------------------------
-   
-   function extractBrowserVersion (browserVersion)
-   {
-     browserVersion = trim (browserVersion);
-   
-     index = browserVersion.indexOf (";");
-     if (index > -1)
-       browserVersion = browserVersion.substring (0, index);
-     else
-     {
-       index = browserVersion.indexOf (")");
-       if (index > -1)
-         browserVersion = browserVersion.substring (0, index);
-       else
+      // ----------------------------------------------------------------------------------------------------------------------------------------
+      // detects browser name and version
+      // ----------------------------------------------------------------------------------------------------------------------------------------
+        
+      function detectBrowser ()
+      {
+       browserName = navigator.appName;
+      
+       if (navigator.userAgent.indexOf ("Opera") > -1)
        {
-         index = browserVersion.indexOf (" ");
-         if (index > -1)
-           browserVersion = browserVersion.substring (0, index);
+         browserName = "Opera";
+         var index = navigator.userAgent.indexOf ("Opera");
+         browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 5));
        }
-     }
-   
-     return browserVersion;
-   }
-   
-   // ----------------------------------------------------------------------------------------------------------------------------------------
-   // tests browser name and version
-   // ----------------------------------------------------------------------------------------------------------------------------------------
-   
-   function testBrowserVersion ()
-   {
-     if (! ((browserName == "Internet Explorer" && browserVersion >= "4.0") ||
-            (browserName == "Netscape"          && browserVersion >= "4.0") ||
-            (browserName == "Mozilla"           && browserVersion >= "1.0") ||
-            (browserName == "Opera"             && browserVersion >= "5.0")))
-     {
-       browserSupported = false;
-       alert ("Warning, you are using " + browserName + " Version " + browserVersion + "\n"
-         + "The recommended browsers to view this page are:\n"
-         + "- Internet Explorer 4.0 or better\n"
-         + "- Netscape 4.0 or better\n"
-       );
-     }
-   }
        
+       else if (navigator.userAgent.indexOf ("MSIE") > -1)
+       {
+         browserName = "Internet Explorer";
+         var index = navigator.userAgent.indexOf ("MSIE");
+         browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 4));
+       }
+       
+       else if (navigator.vendor == "Netscape6" || navigator.vendor == "Netscape")
+       {
+         browserName = "Netscape";
+         browserVersion = navigator.vendorSub;
+       }
+       
+       else if (navigator.userAgent.indexOf ("Gecko") > -1)
+       {
+         browserName = "Mozilla";
+         var index = navigator.userAgent.indexOf ("rv:");
+         browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 3));
+       }
+     
+       else if (navigator.appName.indexOf ("Netscape") != -1)
+       {
+         browserName = "Netscape";
+         var index = navigator.appVersion.indexOf (" ");
+         browserVersion = navigator.appVersion.substring (0, index);
+       }
+      }
+      // ----------------------------------------------------------------------------------------------------------------------------------------
+      // extracts browser version
+      // ----------------------------------------------------------------------------------------------------------------------------------------
+      
+      function extractBrowserVersion (browserVersion)
+      {
+        browserVersion = trim (browserVersion);
+      
+        index = browserVersion.indexOf (";");
+        if (index > -1)
+          browserVersion = browserVersion.substring (0, index);
+        else
+        {
+          index = browserVersion.indexOf (")");
+          if (index > -1)
+            browserVersion = browserVersion.substring (0, index);
+          else
+          {
+            index = browserVersion.indexOf (" ");
+            if (index > -1)
+              browserVersion = browserVersion.substring (0, index);
+          }
+        }
+      
+        return browserVersion;
+      }
+      
+      // ----------------------------------------------------------------------------------------------------------------------------------------
+      // tests browser name and version
+      // ----------------------------------------------------------------------------------------------------------------------------------------
+      
+      function testBrowserVersion ()
+      {
+        if (! ((browserName == "Internet Explorer" && browserVersion >= "4.0") ||
+               (browserName == "Netscape"          && browserVersion >= "4.0") ||
+               (browserName == "Mozilla"           && browserVersion >= "1.0") ||
+               (browserName == "Opera"             && browserVersion >= "5.0")))
+        {
+          browserSupported = false;
+          alert ("Warning, you are using " + browserName + " Version " + browserVersion + "\n"
+            + "The recommended browsers to view this page are:\n"
+            + "- Internet Explorer 4.0 or better\n"
+            + "- Netscape 4.0 or better\n"
+          );
+        }
+      }
+
 site:
   name: jcpenney.com
   script: http://www.jcpenney.com/jcp/Javascript/XBase.js?Version=11172010
@@ -1108,46 +1106,46 @@ site:
   script: (inline)
   date: 01/06/2012
   sniff: |
-  //display old browser message
-  function BrowserCheck() {
-  var b = navigator.appName;
-  if (b=="Netscape") this.b = "ns";
-  else if (b=="Microsoft Internet Explorer") this.b = "ie";
-  else if (b=="Opera") this.b = "op";
-  else this.b = b;
-  this.v = parseInt(navigator.appVersion);
-  this.ns = (this.b=="ns" && this.v==4);
-  this.ns4 = (this.b=="ns" && this.v>=4 && this.v<5);
-  this.ns5 = (this.b=="ns" && this.v>=5);
-  this.op = (this.b=="op" && this.v>=4);
-  this.op5 = (this.b=="op" && this.v>=5);
-  this.ie = (this.b=="ie" && this.v>=4);
-  this.ie4 = (navigator.userAgent.indexOf('MSIE 4')>0);
-  this.ie5 = (navigator.userAgent.indexOf('MSIE 5')>0);
-  this.ie6 = (navigator.userAgent.indexOf('MSIE 6')>0);
-  if (this.ie5) this.v = 5;
-  this.min = (this.ns||this.ie);
-  }
-  is = new BrowserCheck();
-  var isNav = false;
-  var isDom = false;
-  var isIE = false;
-  var isOp = false;
-  if (is.ns4){ isNav = true; }
-  if (is.ie4 || is.ie5 || is.ie6){ isIE = true; }
-  if (is.op5){ isOp = true; }
-  if (is.ns5){ isDom = true; }
-  if (!isIE && !isNav && !isDom){
-  document.write("You need a 4.0+ browser");
-  }
+       //display old browser message
+       function BrowserCheck() {
+       var b = navigator.appName;
+       if (b=="Netscape") this.b = "ns";
+       else if (b=="Microsoft Internet Explorer") this.b = "ie";
+       else if (b=="Opera") this.b = "op";
+       else this.b = b;
+       this.v = parseInt(navigator.appVersion);
+       this.ns = (this.b=="ns" && this.v==4);
+       this.ns4 = (this.b=="ns" && this.v>=4 && this.v<5);
+       this.ns5 = (this.b=="ns" && this.v>=5);
+       this.op = (this.b=="op" && this.v>=4);
+       this.op5 = (this.b=="op" && this.v>=5);
+       this.ie = (this.b=="ie" && this.v>=4);
+       this.ie4 = (navigator.userAgent.indexOf('MSIE 4')>0);
+       this.ie5 = (navigator.userAgent.indexOf('MSIE 5')>0);
+       this.ie6 = (navigator.userAgent.indexOf('MSIE 6')>0);
+       if (this.ie5) this.v = 5;
+       this.min = (this.ns||this.ie);
+       }
+       is = new BrowserCheck();
+       var isNav = false;
+       var isDom = false;
+       var isIE = false;
+       var isOp = false;
+       if (is.ns4){ isNav = true; }
+       if (is.ie4 || is.ie5 || is.ie6){ isIE = true; }
+       if (is.op5){ isOp = true; }
+       if (is.ns5){ isDom = true; }
+       if (!isIE && !isNav && !isDom){
+       document.write("You need a 4.0+ browser");
+       }
 
 site: 
-  name: monami (github)    
+  name: monami (github)
   script: https://raw.github.com/jamesgpearce/monomi/master/lib/monomi.js 
   date: 01-26-2012
   sniff: |
       var detectBrowserType = exports.detectBrowserType = function (options) {
-        var opts = merge({
+         var opts = merge({
 
           'order': ['tablet', 'touch', 'mobile', 'desktop'],
           'default': 'unknown',
@@ -1188,77 +1186,75 @@ site:
       }, options);
 
 
-      return function(request, response, next) {
+        return function(request, response, next) {
 
-          var userAgent = getHeader(request, 'user-agent'); //oft-used
-          var browserType = opts['default'];
+            var userAgent = getHeader(request, 'user-agent'); //oft-used
+            var browserType = opts['default'];
 
-          for (var t in opts['order']) {
-              var type = opts['order'][t];
-              var options = opts[type];
-              if (options && (
-                  typeof(options)==='function' && options(request, userAgent))
-                  ||
-                  detect(request, userAgent, options)
-              ) {
-                  browserType = type;
-                  break;
+            for (var t in opts['order']) {
+                var type = opts['order'][t];
+                var options = opts[type];
+                if (options && (
+                    typeof(options)==='function' && options(request, userAgent))
+                    ||
+                    detect(request, userAgent, options)
+                ) {
+                    browserType = type;
+                    break;
+                }
+            }
+            
+            request.monomi = {
+                'browserType' : browserType
+            };
+            
+            next();
+
+        }
+      }
+      function detect(request, userAgent, options) {
+
+          var opts = merge({
+              'order':['user-agent']
+          }, options);
+
+          for (var h in opts['order']) {
+              var header = opts['order'][h].toLowerCase();
+              if (opts[header]) {
+                  var value = (header==='user-agent') ? userAgent : getHeader(request, header);
+                  if (value.match(opts[header])!=null) {
+                      return true;
+                  }
               }
           }
-          
-          request.monomi = {
-              'browserType' : browserType
-          };
-          
-          next();
 
+          return false;
       }
-  }
 
 
-  function detect(request, userAgent, options) {
+      var getHeader = exports.getHeader = function(request, header, tryPrefix, defaultValue) {
 
-      var opts = merge({
-          'order':['user-agent']
-      }, options);
+          tryPrefix = typeof(tryPrefix) != 'undefined' ? tryPrefix : 'x-device-';
 
-      for (var h in opts['order']) {
-          var header = opts['order'][h].toLowerCase();
-          if (opts[header]) {
-              var value = (header==='user-agent') ? userAgent : getHeader(request, header);
-              if (value.match(opts[header])!=null) {
-                  return true;
+          var value = request.headers[tryPrefix + header];
+          if (value) { return value; }
+
+          value = request.headers[header];
+          if (value) { return value; }
+
+          return typeof(defaultValue) != 'undefined' ? defaultValue : '';
+      }
+
+
+      function merge() {
+          var merged = {};
+            for (a in arguments) {
+              for (f in arguments[a]) {
+                  merged[f] = arguments[a][f];
               }
           }
-      }
-
-      return false;
-  }
-
-
-  var getHeader = exports.getHeader = function(request, header, tryPrefix, defaultValue) {
-
-      tryPrefix = typeof(tryPrefix) != 'undefined' ? tryPrefix : 'x-device-';
-
-      var value = request.headers[tryPrefix + header];
-      if (value) { return value; }
-
-      value = request.headers[header];
-      if (value) { return value; }
-
-      return typeof(defaultValue) != 'undefined' ? defaultValue : '';
-  }
-
-
-  function merge() {
-      var merged = {};
-        for (a in arguments) {
-          for (f in arguments[a]) {
-              merged[f] = arguments[a][f];
-          }
-      }
-      return merged;
-  };
+          return merged;
+      };
 
 site:
   name: Wonderful Pistacio Chrome Birds
@@ -1283,94 +1279,94 @@ site:
   script: https://www.huntington.com/scripts/browserCheckOnHome.js
   date: 06-28-2012
   sniff: |
-  //Set up variables
-  var agent="";
-  var appVersion="";
-  var AppNum = -1;
-  var minor = -1;
-  var major = -1;
-  var OSplatform = "";
-  var browserOkay = false;
-  
-  //Determine browser name and convert chars to lowercase to make it easier to compare strings later
-  var agent=navigator.userAgent.toLowerCase();
-  var appVersion = navigator.appVersion.toLowerCase();
-  
-  //Determine browser version numbers
-  minor = parseFloat(appVersion);
-  major = parseInt(minor);
-  
-  // Determine OS
-  if((agent.indexOf("windows xp")!=-1) || (agent.indexOf("windows nt 5.1")!=-1)) {
-    OSplatform="windowsXP";
-  }
-  else if((agent.indexOf("windows nt 5.0")!=-1) || (agent.indexOf("windows 2000")!=-1)) {
-    OSplatform="windows2000";
-  }
-  else if((agent.indexOf("winnt")!=-1) || (agent.indexOf("windows nt")!=-1)) {
-    OSplatform="windowsNT";
-  }
-  else if((agent.indexOf("win98")!=-1) || (agent.indexOf("windows 98")!=-1)) {
-    OSplatform="windows98";
-  }
-  else if(agent.indexOf("mac")!=-1) {
-    OSplatform = "mac";
-  }
-  if(appVersion.indexOf('msie') !=-1) { //it's IE
-    msiePosition = appVersion.indexOf('msie');
-    minor = parseFloat(appVersion.substring(msiePosition+5,appVersion.indexOf(';',msiePosition))); //indexOf('searchValue', 'fromIndex')
-    if(minor >= 5 && OSplatform == "mac") { browserOkay = true;}
-    else if(minor >= 5.5 && (OSplatform.indexOf('windows') != -1)) //OSplatform is any acceptable version of windows
-    {
-      browserOkay = true;
-    }
-  } //end IE
-  else if(agent.indexOf('mozilla')!=-1 && agent.indexOf('opera')==-1) { //Yay! Mozilla user!
-    browserOkay = true;
-  }
-  else if(parseFloat(navigator.vendorSub)) { //CHECK FOR NN
-    minor = parseFloat(navigator.vendorSub);
-    if(minor >= 7)
-    {
-      browserOkay = true;
-    }
-  } //END CHECK FOR NN
-  else if((agent.indexOf('safari')!=-1) && (OSplatform = "mac")) { //CHECK FOR SAFARI
-    browserOkay = true;
-  }
-  else if(agent.indexOf('aol')!=-1) { //CHECK FOR AOL
-    if(minor >= 6 && (OSplatform.indexOf('windows') || OSplatform == "mac")) {  //OSplatform is any acceptable version of windows or OSplatform is mac
-      browserOkay = true;
-    }
-    else {
-      if(minor >= 7 && (OSplatform.indexOf('windows'))) {  //OSplatform is any acceptable version of windows
-        browserOkay = true;
-      }
-    }
-  }
-  
-  function browserCheck() {
-  
-  //alert("agent is " + agent);
-  //alert("is firefox? " + agent.indexOf('firefox'));
-  //alert("appVersion is " + appVersion);
-  //alert("AppNum is " + AppNum);
-  //alert("minor is " + minor);
-  //alert("major is " + major);
-  //alert("OSplatform is " + OSplatform);
-  //alert("browserOkay is " + browserOkay);
-  
-  //do the browser check only if user is on the home page
-  if((location.pathname == "/") 
-    || (location.pathname =="/index.html") 
-    || (location.pathname =="/index.htm")
-    || (location.pathname =="/indexWithIncludes.html")) 
-    {
-      if (browserOkay != true) {
-        location.replace("/home/browserUpgrade.htm");
-      }
-    }
-  }
+       //Set up variables
+       var agent="";
+       var appVersion="";
+       var AppNum = -1;
+       var minor = -1;
+       var major = -1;
+       var OSplatform = "";
+       var browserOkay = false;
+       
+       //Determine browser name and convert chars to lowercase to make it easier to compare strings later
+       var agent=navigator.userAgent.toLowerCase();
+       var appVersion = navigator.appVersion.toLowerCase();
+       
+       //Determine browser version numbers
+       minor = parseFloat(appVersion);
+       major = parseInt(minor);
+       
+       // Determine OS
+       if((agent.indexOf("windows xp")!=-1) || (agent.indexOf("windows nt 5.1")!=-1)) {
+         OSplatform="windowsXP";
+       }
+       else if((agent.indexOf("windows nt 5.0")!=-1) || (agent.indexOf("windows 2000")!=-1)) {
+         OSplatform="windows2000";
+       }
+       else if((agent.indexOf("winnt")!=-1) || (agent.indexOf("windows nt")!=-1)) {
+         OSplatform="windowsNT";
+       }
+       else if((agent.indexOf("win98")!=-1) || (agent.indexOf("windows 98")!=-1)) {
+         OSplatform="windows98";
+       }
+       else if(agent.indexOf("mac")!=-1) {
+         OSplatform = "mac";
+       }
+       if(appVersion.indexOf('msie') !=-1) { //it's IE
+         msiePosition = appVersion.indexOf('msie');
+         minor = parseFloat(appVersion.substring(msiePosition+5,appVersion.indexOf(';',msiePosition))); //indexOf('searchValue', 'fromIndex')
+         if(minor >= 5 && OSplatform == "mac") { browserOkay = true;}
+         else if(minor >= 5.5 && (OSplatform.indexOf('windows') != -1)) //OSplatform is any acceptable version of windows
+         {
+           browserOkay = true;
+         }
+       } //end IE
+       else if(agent.indexOf('mozilla')!=-1 && agent.indexOf('opera')==-1) { //Yay! Mozilla user!
+         browserOkay = true;
+       }
+       else if(parseFloat(navigator.vendorSub)) { //CHECK FOR NN
+         minor = parseFloat(navigator.vendorSub);
+         if(minor >= 7)
+         {
+           browserOkay = true;
+         }
+       } //END CHECK FOR NN
+       else if((agent.indexOf('safari')!=-1) && (OSplatform = "mac")) { //CHECK FOR SAFARI
+         browserOkay = true;
+       }
+       else if(agent.indexOf('aol')!=-1) { //CHECK FOR AOL
+         if(minor >= 6 && (OSplatform.indexOf('windows') || OSplatform == "mac")) {  //OSplatform is any acceptable version of windows or OSplatform is mac
+           browserOkay = true;
+         }
+         else {
+           if(minor >= 7 && (OSplatform.indexOf('windows'))) {  //OSplatform is any acceptable version of windows
+             browserOkay = true;
+           }
+         }
+       }
+       
+       function browserCheck() {
+       
+       //alert("agent is " + agent);
+       //alert("is firefox? " + agent.indexOf('firefox'));
+       //alert("appVersion is " + appVersion);
+       //alert("AppNum is " + AppNum);
+       //alert("minor is " + minor);
+       //alert("major is " + major);
+       //alert("OSplatform is " + OSplatform);
+       //alert("browserOkay is " + browserOkay);
+       
+       //do the browser check only if user is on the home page
+       if((location.pathname == "/") 
+         || (location.pathname =="/index.html") 
+         || (location.pathname =="/index.htm")
+         || (location.pathname =="/indexWithIncludes.html")) 
+         {
+           if (browserOkay != true) {
+             location.replace("/home/browserUpgrade.htm");
+           }
+         }
+       }
 #site:
 #  name:
 #  script:
