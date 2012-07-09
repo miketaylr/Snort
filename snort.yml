@@ -281,18 +281,6 @@ site:
         }
 
 site:
-  name: github.com
-  script:  https://github.com/404
-  date: 2011-01-27
-  sniff: | 
-        // Detect if the browser is IE or not.
-        // If it is not IE, we assume that the browser is NS.
-        var IE = document.all?true:false;
-        
-        // If NS -- that is, !IE -- then set up for mouse capture
-        if (!IE) document.captureEvents(Event.MOUSEMOVE);
-
-site:
   name: github.com/keithclark/selectivizr
   script: https://github.com/keithclark/selectivizr/blob/cb49ce2ca23d2f61626af3676b6236b61f320f40/selectivizr.js
   date: 2011-01-31
