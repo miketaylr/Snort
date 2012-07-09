@@ -280,6 +280,7 @@ site:
               document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
         }
 
+# @smt let me know that this has been fixed by Github now. See https://github.com/miketaylr/Snort/pull/3#commits-pushed-dd1b8a8
 site:
   name: github.com
   script:  https://github.com/404
