@@ -1429,6 +1429,24 @@ site:
          this.screenWidth=top.screen.width;
          this.colorDepth=(this.nn>=4)?top.screen.pixelDepth:top.screen.colorDepth;
         }
+        
+site:
+  name: globo.com
+  script: http://s.glbimg.com/en/ho/static/CACHE/js/267143c2f15d.js
+  date: 07-09-2012
+  sniff: |
+       vendor = /webkit/i.test(navigator.appVersion) ? "webkit" : 
+         /firefox/i.test(navigator.userAgent) ? "Moz" 
+         : /trident/i.test(navigator.userAgent) ? "ms" 
+         : "opera" in window ? "O" : "", 
+         isAndroid = /android/gi.test(navigator.appVersion), 
+         isIDevice = /iphone|ipad/gi.test(navigator.appVersion), 
+         isPlaybook = /playbook/gi.test(navigator.appVersion), 
+         isTouchPad = /hp-tablet/gi.test(navigator.appVersion), 
+         has3d = "WebKitCSSMatrix" in window && "m11" in new WebKitCSSMatrix, 
+         hasTouch = "ontouchstart" in window && !isTouchPad, 
+         hasTransform = vendor + "Transform" in document.documentElement.style, 
+         hasTransitionEnd = isIDevice || isPlaybook
 #site:
 #  name:
 #  script:
