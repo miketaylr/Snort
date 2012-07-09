@@ -1367,6 +1367,68 @@ site:
            }
          }
        }
+       
+site:
+  name: msnbc
+  script: http://www.msnbc.msn.com/id/26315908/vp/40140781#40140781
+  date: 07-09-2012
+  inline: |
+        function UberSniff(sUndefined){
+         var ua=navigator.userAgent.toLowerCase();
+         this.webtv=(ua.indexOf("webtv")>-1);
+         this.ie=(parseFloat(ua.slice(ua.indexOf("msie")+5)));
+         this.nn=(this.ie)?(-1):(parseFloat(ua.slice(ua.indexOf("mozilla/")+8)));
+         this.mac=(ua.indexOf("mac")>-1);
+         this.firefox=(ua.indexOf("firefox")>-1);
+         this.safari=(ua.indexOf("safari")>-1);
+         if(navigator.MSNBCFlashVer==sUndefined){
+          if(this.nn<=0&&this.ie<5){
+           navigator.MSNBCFlashVer=6;
+          }else{
+           if(!this.mac&&this.ie>4){
+            var oTestVersion=new tryCatch("oWMPlayer=new ActiveXObject('ShockwaveFlash.ShockwaveFlash.'+s1);return s1;","return 0;");
+            navigator.MSNBCFlashVer=-1;
+            for(var nCheckVersion=9;nCheckVersion>2;--nCheckVersion){
+             if(oTestVersion.trycatchV(nCheckVersion)){
+              navigator.MSNBCFlashVer=nCheckVersion;break;
+             }
+            }
+           }else{
+            if(navigator.plugins['Shockwave Flash']){
+             navigator.MSNBCFlashVer=(parseInt(navigator.plugins['Shockwave Flash'].description.substr(16)));
+            }else{
+             navigator.MSNBCFlashVer=-1;
+            }
+           }
+          }
+         }
+         this.flash=navigator.MSNBCFlashVer;if(navigator.MSNBCMPlayer==sUndefined){
+          if((this.nn<=0&&this.ie<5)||this.mac){
+           navigator.MSNBCMPlayer=true;
+          }else{
+           if(!this.mac&&this.ie>4){
+            var oTestVersion=new tryCatch("oWMPlayer=new ActiveXObject('WMPlayer.OCX');return oWMPlayer.versionInfo;","return 0;");
+            if(oTestVersion.trycatch()){
+             navigator.MSNBCMPlayer=oTestVersion.trycatch();
+            }else{
+             for(itest=0;itest<9;++itest){
+              oTestVersion=new tryCatch("oWMPlayer=new ActiveXObject('MediaPlayer.MediaPlayer.'+itest);return 1;","return 0;");
+              navigator.MSNBCMPlayer=(oTestVersion.trycatch());
+              if(navigator.MSNBCMPlayer){
+               itest=100;
+              }
+             }
+            }
+           }else{
+            navigator.MSNBCMPlayer=!!(navigator.mimeTypes&&navigator.mimeTypes["video/x-ms-wm"]&&navigator.mimeTypes["video/x-ms-wm"].enabledPlugin);
+           }
+          }
+         }
+         this.mplayer=navigator.MSNBCMPlayer;
+         this.screenHeight=top.screen.height;
+         this.screenWidth=top.screen.width;
+         this.colorDepth=(this.nn>=4)?top.screen.pixelDepth:top.screen.colorDepth;
+        }
 #site:
 #  name:
 #  script:
