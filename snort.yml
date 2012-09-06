@@ -1448,6 +1448,20 @@ site:
          hasTouch = "ontouchstart" in window && !isTouchPad, 
          hasTransform = vendor + "Transform" in document.documentElement.style, 
          hasTransitionEnd = isIDevice || isPlaybook
+
+site:
+    name: Apache HTTP Server
+    script: https://github.com/apache/httpd/commit/a381ff35fa4d50a5f7b9f64300dfd98859dee8d0
+    date: 2012-08-11
+    sniff: |
+      # Deal with user agents that deliberately violate open standards
+      #
+      <IfModule setenvif_module>
+      BrowserMatch "MSIE 10.0;" bad_DNT
+      </IfModule>
+      <IfModule headers_module>
+      RequestHeader unset DNT env=bad_DNT
+      </IfModule>
 #site:
 #  name:
 #  script:
