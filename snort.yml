@@ -1464,7 +1464,7 @@ site:
       </IfModule>
 
 site:
-    name: nhk.or.jcp
+    name: nhk.or.jp
     script: http://www.nhk.or.jp/topmenu/1303_js/20130722/common.js
     date: 09-24-2013
     sniff: |
@@ -1493,6 +1493,59 @@ site:
             }
             return o;
         })();
+
+site:
+    name: nhk.or.jp/sp/
+    script: http://www.nhk.or.jp/common/sp/nol_SmartPhone.js
+    date: 09-24-2013
+    sniff: |
+      function nol_getDeviceType(){
+        //戻り値 配列 [0]:smart/tablet/other, [1]:type, [2]:flash, [3]:os, [4]:player
+        var ua=navigator.userAgent;
+        var r=new Array(5);
+        if(ua.search(/iphone/i)>-1){
+            r=['smart','iphone',false,'ios'];
+        }
+        else if(ua.search(/ipod/i)>-1){
+            r=['smart','ipod',false,'ios'];
+        }
+        else if(ua.search(/ipad/i)>-1){
+            r=['tablet','ipad',false,'ios'];
+        }
+        else if(ua.search(/android/i)>-1&&ua.search(/webkit/i)>-1){
+            if(ua.search(/mobile/i)>-1){
+                r=['smart','androidmobile',false,'android'];
+            }
+            else{
+                r=['tablet','androidtablet',false,'android'];
+            }
+        }
+        else if(ua.search(/webkit/i)>-1&&ua.search(/mobile/i)>-1&&ua.search(/iPad/i)==-1){
+            r=['smart','othermobile',false,'other'];
+        }
+        else if(ua.search(/blackberry/i)>-1&&ua.search(/webkit/i)>-1&&ua.search(/mobile/i)>-1){
+            r=['smart','blackberry',false,'ohter'];
+        }
+        else if(ua.search(/windows phone/i)>-1&&ua.search(/msie/i)>-1){
+            r=['other','windowsphone',false,'other'];
+        }
+        else if(ua.search(/^docomo/i)>-1){
+            r=['mobile','imode',false,'other'];
+        }
+        else if(ua.search(/^kddi/i)>-1||ua.search(/^up\.browser/i)>-1){
+            r=['mobile','ezweb',false,'other'];
+        }
+        else if(ua.search(/^softbank/i)>-1||ua.search(/^vodafone/i)>-1||ua.search(/^mot/i)>-1){
+            r=['mobile','sb',false,'other'];
+        }
+        else{
+            r=['other','other',false,'other'];
+        }
+        r[2]=nol_com.chkFlashVideo();
+        r[4]=nol_com.getPlayerDetector();
+        return r;
+      }
+
 #site:
 #  name:
 #  script:
