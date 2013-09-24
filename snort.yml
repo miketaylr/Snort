@@ -1462,6 +1462,37 @@ site:
       <IfModule headers_module>
       RequestHeader unset DNT env=bad_DNT
       </IfModule>
+
+site:
+    name: nhk.or.jcp
+    script: http://www.nhk.or.jp/topmenu/1303_js/20130722/common.js
+    date: 09-24-2013
+    sniff: |
+        //browser
+        var g_ua=(function(){
+            var o={};
+            var ua=navigator.userAgent;
+            var apn=navigator.appName;
+            var apv=navigator.appVersion;
+            o.Win9X = (apv.search(/windows 98/i)>-1);
+            o.IE = (apn.search(/internet explorer/i)>-1);
+            o.Opera = (ua.search(/opera/i)>-1);
+            if(o.Opera)o.IE=false;
+            o.Safari = (apv.search(/safari/i)>-1);
+            o.iPhone = (apv.search(/iphone/i)>-1);
+            o.iPod = (apv.search(/ipod/i)>-1);
+            o.iPad = (apv.search(/ipad/i)>-1);
+            o.Android = (apv.search(/android/i)>-1);
+            o.BlackBerry = (ua.search(/blackberry/i)>-1);
+            o.SmartPhone = (ua.search(/webkit/i)>-1&&ua.search(/mobile/i)>-1);
+            if(o.iPad)o.SmartPhone=false;
+            o.iev=-1;
+            if(o.IE){
+                var re=new RegExp('MSIE ([0-9]{1,}[\.0-9]{0,})');
+                if(re.exec(ua)!=null)o.iev=parseFloat(RegExp.$1);
+            }
+            return o;
+        })();
 #site:
 #  name:
 #  script:
