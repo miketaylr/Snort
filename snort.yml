@@ -1546,6 +1546,43 @@ site:
         return r;
       }
 
+site:
+    name: h5.qq.com
+    script: http://h5.qq.com/HallEngine.js
+    date: 10-24-2013
+    sniff: |
+       function getUA() {
+         var a = navigator.userAgent.toLowerCase();
+         if (a == null) {
+           return "ie"
+         } else {
+           if (a.indexOf("chrome") != -1) {
+             return "chrome"
+           } else {
+             if (a.indexOf("opera") != -1) {
+               return "opera"
+             } else {
+               if (a.indexOf("msie") != -1) {
+                 return "ie"
+               } else {
+                 if (a.indexOf("safari") != -1) {
+                   return "safari"
+                 } else {
+                   if (a.indexOf("firefox") != -1) {
+                     return "firefox"
+                   } else {
+                     if (a.indexOf("gecko") != -1) {
+                       return "gecko"
+                     } else {
+                       return "ie"
+                     }
+                   }
+                 }
+               }
+             }
+           }
+         }
+       }
 #site:
 #  name:
 #  script:
