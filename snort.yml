@@ -1583,6 +1583,19 @@ site:
            }
          }
        }
+
+site:
+    name: band.uol.com.br
+    date: 11-19-2013
+    script: (inline)
+    sniff: |
+        var ua = navigator.userAgent;
+        var iOS = /iPhone/i.test(ua) || /iPod/i.test(ua) || /Android/i.test(ua) ;
+
+        if(iOS){
+            //alert(iOS);
+            window.location.href='http://www.band.com.br/m/';
+        }
 #site:
 #  name:
 #  script:
