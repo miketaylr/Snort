@@ -2,7 +2,7 @@ site:
   name: cornify.com
   script:  http://www.cornify.com/js/rainbow.js
   date: 2011-01-26
-  sniff: | 
+  sniff: |
         // Only create rainbow canvas if browser supports the canvas tag.
         var rainbowCanvas;
         function startRainbow(){
@@ -22,10 +22,10 @@ site:
   sniff: |
         function BrowserProps() {
           var name = navigator.appName
-          
+
           if (name=="Netscape") name = "ns"
           else if (name=="Microsoft Internet Explorer") name = "ie"
-          
+
           this.v = parseInt(navigator.appVersion,10)
           this.ns = (name=="ns" && this.v>=4)
           this.ns4 = (this.ns && this.v==4)
@@ -38,17 +38,17 @@ site:
           this.op = navigator.userAgent.indexOf("Opera")!=-1
           this.min = (this.ns||this.ie)
           this.Mac = (navigator.platform.indexOf("Mac") >= 0)
-          this.activeX = ( this.ie ) ? true : false; 
+          this.activeX = ( this.ie ) ? true : false;
           this.wmpVersion = 6; // default version number we only support 7 and up
           var player = null;
-          try 
+          try
           {
             if(window.ActiveXObject)
               player = new ActiveXObject("WMPlayer.OCX.7");
             else if (window.GeckoActiveXObject)
               player = new GeckoActiveXObject("WMPlayer.OCX.7");
             else
-              player = navigator.mimeTypes["application/x-mplayer2"].enabledPlugin;    
+              player = navigator.mimeTypes["application/x-mplayer2"].enabledPlugin;
           }
           catch(e)
           {
@@ -58,8 +58,8 @@ site:
             this.wmpVersion = player.versionInfo.slice(0,player.versionInfo.indexOf('.'));
           }
         }
-        
-        is = new BrowserProps()       
+
+        is = new BrowserProps()
   inline: |
          if( !is.min )
            document.write( 'Your browser does not support dynamic html. Please download a current version of either <a href="http://www.microsoft.com/ie/">Microsoft Internet Explorer</a> or <a href="http://www.mozilla.com/en-US/firefox/">Mozilla Firefox </a> and try visiting our site again.  Thank You.<br /><br />' )
@@ -187,10 +187,10 @@ site:
                 identity: "Linux"
             }
           ]
-        
+
         };
         BrowserDetect.init();
-        
+
         if(BrowserDetect.OS == 'Windows'){
           if(BrowserDetect.browser == 'Explorer'){
             if(BrowserDetect.version >= 7){
@@ -216,7 +216,7 @@ site:
             if(BrowserDetect.version >= 3){
               //Browser Supported
               document.writeln('<div id="supported_browser" value="flase" style="display:none;">\n<\/div>');
-            }    
+            }
             else{
               //Browser not supported
               document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
@@ -231,7 +231,7 @@ site:
           if(BrowserDetect.browser == 'Safari'){
             if(BrowserDetect.version >= 4){
               //Browser Supported
-              document.writeln('<div id="supported_browser" value="true" style="display:none;">\n<\/div>');      
+              document.writeln('<div id="supported_browser" value="true" style="display:none;">\n<\/div>');
             }
             else{
               //Browser not supported
@@ -242,7 +242,7 @@ site:
             if(BrowserDetect.version >= 3){
               //Browser Supported
               document.writeln('<div id="supported_browser" value="true" style="display:none;">\n<\/div>');
-            }    
+            }
             else{
               //Browser not supported
               document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
@@ -252,7 +252,7 @@ site:
             if(BrowserDetect.version >= 3){
               //Browser Supported
               document.writeln('<div id="supported_browser" value="true" style="display:none;">\n<\/div>');
-            }    
+            }
             else{
               //Browser not supported
               document.writeln('<div id="supported_browser" value="false" style="display:none;">\n<\/div>');
@@ -267,7 +267,7 @@ site:
           if(BrowserDetect.browser == 'Safari'){
             if(BrowserDetect.version >= 4){
               //Browser Supported
-              document.writeln('<div id="supported_browser" value="true" style="display:none;">\n<\/div>');      
+              document.writeln('<div id="supported_browser" value="true" style="display:none;">\n<\/div>');
             }
             else{
               //Browser not supported
@@ -285,11 +285,11 @@ site:
   name: github.com
   script:  https://github.com/404
   date: 2011-01-27
-  sniff: | 
+  sniff: |
         // Detect if the browser is IE or not.
         // If it is not IE, we assume that the browser is NS.
         var IE = document.all?true:false;
-        
+
         // If NS -- that is, !IE -- then set up for mouse capture
         if (!IE) document.captureEvents(Event.MOUSEMOVE);
 
@@ -299,13 +299,13 @@ site:
   date: 2011-01-31
   sniff: |
        var ieVersion = /MSIE ([\d])/.exec(navigator.userAgent)[1];
-       
+
        // If were not in standards mode, IE is too old / new or we can't create
        // an XMLHttpRequest object then we should get out now.
        if (doc.compatMode != 'CSS1Compat' || ieVersion<6 || ieVersion>8 || !xhr) {
             return
        }
-       
+
 site:
   name: vid.ly
   script: http://m.vid.ly/js/html5.js
@@ -314,7 +314,7 @@ site:
        hasQiucktime : function () {
            ua = navigator.userAgent;
            version = parseInt(ua.substr(ua.indexOf('Version')).split(" ").shift().split("/").pop());
-           return (ua.indexOf('Safari') != -1 && ua.indexOf('iPhone')==-1  &&  ua.indexOf('iPad') == -1 && ua.indexOf('iPod') == -1 && ua.indexOf("Chrome") == -1 && version < 5); 
+           return (ua.indexOf('Safari') != -1 && ua.indexOf('iPhone')==-1  &&  ua.indexOf('iPad') == -1 && ua.indexOf('iPod') == -1 && ua.indexOf("Chrome") == -1 && version < 5);
          },
        hasVideo : function () {
          return (this.hasPlayType() || this.isMobileOSX());
@@ -323,7 +323,7 @@ site:
          ua = navigator.userAgent;
          return (ua.indexOf('MSIE') != -1 && ua.indexOf('Opera') == -1);
        }
-       
+
 site:
   name: vid.ly
   script: http://vid.ly/templates/js/video.js
@@ -343,41 +343,41 @@ site:
          var match = navigator.userAgent.match(/Android (\d+)\./i);
          if (match && match[1]) { return match[1]; }
        };
-       
-site: 
+
+site:
   name: www.assetmanagement.hsbc.com
   script: http://www.assetmanagement.hsbc.com/gam/control/js/browser_detect.js
   date: 2011-02-02
   sniff: |
        // JavaScript Document
-       var browserName=navigator.appName; 
+       var browserName=navigator.appName;
        if (browserName=="Netscape")
-       { 
-       
+       {
+
        }
-       else 
-       { 
+       else
+       {
         if (browserName=="Microsoft Internet Explorer")
         {
-        
-           var browserVer=parseInt(navigator.appVersion); 
-           
+
+           var browserVer=parseInt(navigator.appVersion);
+
          var ua = navigator.userAgent;
          var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
          if (re.exec(ua) != null) {
            rv = parseFloat( RegExp.$1 );
-           
+
             if(rv == 6) {
-             document.write('<link href="/gam/control/css/browsers/amg_ie6.css" rel="stylesheet" type="text/css" />'); 
-           } 
+             document.write('<link href="/gam/control/css/browsers/amg_ie6.css" rel="stylesheet" type="text/css" />');
+           }
             if(rv == 7) {
                document.write('<link href="/gam/control/css/browsers/amg_ie7.css" rel="stylesheet" type="text/css" />');
-           }     
+           }
            /* if(rv == 8) {
               document.getElementById("ie").href = "amg_ie8.css";
             }*/
-            
-         }  
+
+         }
         }
         else
          {
@@ -420,11 +420,11 @@ site:
   sniff: |
     // ********** The final criteria for takeover redirect
     // ********** this function checks browser and OS version, excluding Mac, up to Win95 and anything other than IE4+
-    
+
     function TakeOverOk() {
         var agt=navigator.userAgent.toLowerCase();
         var intMajor = parseInt(navigator.appVersion);
-    
+
         var bIE    = ((agt.indexOf("msie") != -1) && (agt.indexOf("opera") == -1));
         var bIE3    = (bIE && (intMajor < 4));
         var bIE4    = (bIE && (intMajor == 4) && (agt.indexOf("msie 4")!=-1) );
@@ -434,14 +434,14 @@ site:
         var bWin31 = ((agt.indexOf("windows 3.1")!=-1) || (agt.indexOf("win16")!=-1) ||
                             (agt.indexOf("windows 16-bit")!=-1));
         var b95over = (!(bWin95 || bWin31) && bWin)
-    
+
         var bGTG = (bWin && bIE4up && b95over );
-    
+
     return bGTG
-    
+
     }
 
-site: 
+site:
   name: www.copaair.com
   script: http://www.copaair.com/_layouts/1033/init.js?rev=yOq8IoAABYCtaZjMVrjxtg%3D%3D
   date: 03-02-2011
@@ -495,7 +495,7 @@ site:
        }
        var browseris=new Browseris();
        var bis=browseris;
-       
+
 site:
   name: http://www.whatbrowser.org/
   script: http://www.whatbrowser.org/en/browser.js
@@ -503,7 +503,7 @@ site:
   sniff: |
         var browser = {
           set: {
-            
+
             "google_chrome": {
               name: "Google Chrome",
               match: /Chrome\/(1?[0-9])?\..*? Safari/,
@@ -526,7 +526,7 @@ site:
                 "13": {date: "released April 2011 ", version: "13", notes: ''}
               }
             },
-            
+
             "internet_explorer_8": {
               name: "Internet Explorer",
               match: /MSIE ([8])\..*;|MSIE ([7])\.[0-9.]*;.*Trident.*/,
@@ -536,7 +536,7 @@ site:
                 "9": {date: "released November 2010 ", version: "9", notes: ''}
               }
             },
-            
+
             "internet_explorer_7": {
               name: "Internet Explorer",
               match: /MSIE ([7])\..*;/,
@@ -545,7 +545,7 @@ site:
                 "7": {date: "released October 2006 ", version: "7", notes: ''}
               }
             },
-            
+
             "internet_explorer_legacy": {
               name: "Internet Explorer",
               match: /MSIE ([0-6])\..*;/,
@@ -555,7 +555,7 @@ site:
                 "5": {date: "released March 1999 ", version: "5", notes: ''}
               }
             },
-            
+
             "firefox": {
               name: "Firefox",
               match: /Firefox\/([1-9](?:\.[0-9])?).*/,
@@ -569,7 +569,7 @@ site:
                 "4.0": {date: "released January 2011 ", version: "4", notes: ''}
               }
             },
-            
+
             "opera_legacy": {
               name: "Opera",
               match: /Opera\/([0-8][0-9]?)\..*?|Opera\/([0-9])\.[0-7].*?/,
@@ -585,7 +585,7 @@ site:
                 "9.80": {date: "", version: "9.80", notes: ''}
               }
             },
-            
+
             "safari": {
               name: "Safari",
               match: /Version\/([0-9])\..*? Safari/,
@@ -596,7 +596,7 @@ site:
                 "5": {date: "released June 2010 ", version: "5", notes: ''}
               }
             },
-            
+
             "safari_legacy": {
               name: "Safari",
               match: /Safari\/([34]1)/,
@@ -606,7 +606,7 @@ site:
                 "31": {date: "released June 2003 ", version: "1", notes: ''}
               }
             },
-            
+
             "opera": {
               name: "Opera",
               match: /Opera\/[0-9]{1,2}\..*?Version\/([0-9]{1,2}\.[0-9]{1,2}).*?/,
@@ -629,9 +629,9 @@ site:
                 "11.01": {date: "released January 2011 ", version: "11", notes: ''}
               }
             }
-            
+
           },
-          
+
           platform: navigator.userAgent.match(/Macintosh/) ? 'Mac' : 'PC',
           possibilities: [
             'google_chrome',
@@ -644,14 +644,14 @@ site:
             'safari_legacy',
             'opera'
           ],
-          
+
           detect: function() {
             var len = this.possibilities.length;
             for (i = 0; i < len; i++) {
               var k = this.possibilities[i];
               if (this.set.hasOwnProperty(k) && (this.set[k].version = navigator.userAgent.match(this.set[k].match))) {
                 var matching = this.set[k];
-                
+
                 // hack for ie8 ACTING LIKE ie7
                 if (k == 'internet_explorer_8' && !matching.version[1]) {
                   matching.version[1] = '8';
@@ -663,13 +663,13 @@ site:
               matching.version = ['', release.version];
                 matching.releaseDate = release.date;
                   matching.notes = release.notes;
-                  
+
               return matching;
               }
             }
             return null;
           },
-          
+
           error_message: function(){
               if ('None'!='None'){
                   return 'None';
@@ -680,8 +680,8 @@ site:
               };
           }
         };
-        
-site: 
+
+site:
   name: www.3dcontentcentral.com
   script: http://www.3dcontentcentral.com/js/base.js
   date: 03-09-2011
@@ -700,7 +700,7 @@ site:
     function GetBrowserType()
     {
       var ua=navigator.userAgent.toUpperCase();
-    
+
       if (ua.indexOf("CHROME/1.") > -1) return eBrowserType.Chrome_v1;
       if (ua.indexOf("CHROME/2.") > -1) return eBrowserType.Chrome_v2;
         if (ua.indexOf("FIREFOX/2.")>-1) return eBrowserType.FF_v2;
@@ -719,7 +719,7 @@ site:
     // Browser Detection
     var detect = navigator.userAgent.toLowerCase();
     var gl_os,gl_browser,gl_version,gl_total,thestring;
-    
+
     if (checkIt('konqueror'))
     {
       gl_browser = "Konqueror";
@@ -737,9 +737,9 @@ site:
       gl_version = detect.charAt(8);
     }
     else gl_browser = "An unknown browser";
-    
+
     if (!gl_version) gl_version = detect.charAt(place + thestring.length);
-    
+
     if (!gl_os)
     {
       if (checkIt('linux')) gl_os = "Linux";
@@ -748,7 +748,7 @@ site:
       else if (checkIt('win')) gl_os = "Windows"
       else os = "an unknown operating system";
     }
-    
+
     function checkIt(string)
     {
       place = detect.indexOf(string) + 1;
@@ -756,7 +756,7 @@ site:
       return place;
     }
     // End Browser Detection.
-    
+
 site:
   name: http://sapid.sourceforge.net/ssetest/
   script: (inline)
@@ -797,52 +797,52 @@ site:
       // This section contains miscellaneous browser related routines and variables.
       // You DON'T need to make any changes to this file.
       // ----------------------------------------------------------------------------------------------------------------------------------------
-        
+
       var browserName      = "";
       var browserVersion   = "";
       var browserWidth     = 0;
       var browserHeight    = 0;
       var browserSupported = true;
-      
+
       detectBrowser ();
       detectBrowserSize ();
       testBrowserVersion ();
-      
+
       // ----------------------------------------------------------------------------------------------------------------------------------------
       // detects browser name and version
       // ----------------------------------------------------------------------------------------------------------------------------------------
-        
+
       function detectBrowser ()
       {
        browserName = navigator.appName;
-      
+
        if (navigator.userAgent.indexOf ("Opera") > -1)
        {
          browserName = "Opera";
          var index = navigator.userAgent.indexOf ("Opera");
          browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 5));
        }
-       
+
        else if (navigator.userAgent.indexOf ("MSIE") > -1)
        {
          browserName = "Internet Explorer";
          var index = navigator.userAgent.indexOf ("MSIE");
          browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 4));
        }
-       
+
        else if (navigator.vendor == "Netscape6" || navigator.vendor == "Netscape")
        {
          browserName = "Netscape";
          browserVersion = navigator.vendorSub;
        }
-       
+
        else if (navigator.userAgent.indexOf ("Gecko") > -1)
        {
          browserName = "Mozilla";
          var index = navigator.userAgent.indexOf ("rv:");
          browserVersion = extractBrowserVersion (navigator.userAgent.substring (index + 3));
        }
-     
+
        else if (navigator.appName.indexOf ("Netscape") != -1)
        {
          browserName = "Netscape";
@@ -853,11 +853,11 @@ site:
       // ----------------------------------------------------------------------------------------------------------------------------------------
       // extracts browser version
       // ----------------------------------------------------------------------------------------------------------------------------------------
-      
+
       function extractBrowserVersion (browserVersion)
       {
         browserVersion = trim (browserVersion);
-      
+
         index = browserVersion.indexOf (";");
         if (index > -1)
           browserVersion = browserVersion.substring (0, index);
@@ -873,14 +873,14 @@ site:
               browserVersion = browserVersion.substring (0, index);
           }
         }
-      
+
         return browserVersion;
       }
-      
+
       // ----------------------------------------------------------------------------------------------------------------------------------------
       // tests browser name and version
       // ----------------------------------------------------------------------------------------------------------------------------------------
-      
+
       function testBrowserVersion ()
       {
         if (! ((browserName == "Internet Explorer" && browserVersion >= "4.0") ||
@@ -906,48 +906,48 @@ site:
       var BrowserName;
       var usrAgent;
       var pos;
-    
+
       this.IEBrowser    = false;
       this.MozBrowser    = false;
       this.version = null;
       this.MACOS = false;
       usrAgent = navigator.userAgent;
-    
-    
+
+
      //OSTest
      OSName = "Mac";
-       if ((pos = usrAgent.indexOf(OSName)) >= 0) 
+       if ((pos = usrAgent.indexOf(OSName)) >= 0)
       {
         this.MACOS = true;
       }
-    
+
       BrowserName = "MSIE";
-      if ((pos = usrAgent.indexOf(BrowserName)) >= 0) 
+      if ((pos = usrAgent.indexOf(BrowserName)) >= 0)
       {
         this.IEBrowser = true;
         this.version = parseFloat(usrAgent.substr(pos + BrowserName.length));
         return;
       }
-    
+
       BrowserName = "Netscape6/";
-      if ((pos = usrAgent.indexOf(BrowserName)) >= 0) 
+      if ((pos = usrAgent.indexOf(BrowserName)) >= 0)
       {
         this.MozBrowser = true;
         this.version = parseFloat(usrAgent.substr(pos + BrowserName.length));
         return;
       }
-    
+
       // Treat any other "Gecko" browser as NS 6.1.
-    
+
       BrowserName = "Gecko";
-      if ((pos = usrAgent.indexOf(BrowserName)) >= 0) 
+      if ((pos = usrAgent.indexOf(BrowserName)) >= 0)
       {
         this.MozBrowser = true;
         this.version = 6.1;
         return;
       }
-    
-    
+
+
     }
 
 site:
@@ -984,14 +984,14 @@ site:
        return Xinha.is_gecko||(Xinha.is_opera&&Xinha.opera_version>=9.1)||Xinha.ie_version>=5.5;
        };
        Xinha.isSupportedBrowser=Xinha.checkSupportedBrowser();
-       
+
 site:
   name: pcworld.com
   script: http://ftp.pcworld.com/pub/screencams/ascii-matrix.html
   date: 09-19-2011
   sniff: |
        /******* browser detect ******/
-       
+
        with(navigator) {
         Browser=appName;
         Version=parseInt(appVersion.charAt(0));
@@ -1101,7 +1101,7 @@ site:
                }
            }
        })();
-       
+
 site:
   name: http://2010.usopen.org/en_US/scores/stats/day14/1408dss.html
   script: (inline)
@@ -1140,9 +1140,9 @@ site:
        document.write("You need a 4.0+ browser");
        }
 
-site: 
+site:
   name: monami (github)
-  script: https://raw.github.com/jamesgpearce/monomi/master/lib/monomi.js 
+  script: https://raw.github.com/jamesgpearce/monomi/master/lib/monomi.js
   date: 01-26-2012
   sniff: |
       var detectBrowserType = exports.detectBrowserType = function (options) {
@@ -1204,11 +1204,11 @@ site:
                     break;
                 }
             }
-            
+
             request.monomi = {
                 'browserType' : browserType
             };
-            
+
             next();
 
         }
@@ -1288,15 +1288,15 @@ site:
        var major = -1;
        var OSplatform = "";
        var browserOkay = false;
-       
+
        //Determine browser name and convert chars to lowercase to make it easier to compare strings later
        var agent=navigator.userAgent.toLowerCase();
        var appVersion = navigator.appVersion.toLowerCase();
-       
+
        //Determine browser version numbers
        minor = parseFloat(appVersion);
        major = parseInt(minor);
-       
+
        // Determine OS
        if((agent.indexOf("windows xp")!=-1) || (agent.indexOf("windows nt 5.1")!=-1)) {
          OSplatform="windowsXP";
@@ -1345,9 +1345,9 @@ site:
            }
          }
        }
-       
+
        function browserCheck() {
-       
+
        //alert("agent is " + agent);
        //alert("is firefox? " + agent.indexOf('firefox'));
        //alert("appVersion is " + appVersion);
@@ -1356,19 +1356,19 @@ site:
        //alert("major is " + major);
        //alert("OSplatform is " + OSplatform);
        //alert("browserOkay is " + browserOkay);
-       
+
        //do the browser check only if user is on the home page
-       if((location.pathname == "/") 
-         || (location.pathname =="/index.html") 
+       if((location.pathname == "/")
+         || (location.pathname =="/index.html")
          || (location.pathname =="/index.htm")
-         || (location.pathname =="/indexWithIncludes.html")) 
+         || (location.pathname =="/indexWithIncludes.html"))
          {
            if (browserOkay != true) {
              location.replace("/home/browserUpgrade.htm");
            }
          }
        }
-       
+
 site:
   name: msnbc
   script: http://www.msnbc.msn.com/id/26315908/vp/40140781#40140781
@@ -1430,23 +1430,23 @@ site:
          this.screenWidth=top.screen.width;
          this.colorDepth=(this.nn>=4)?top.screen.pixelDepth:top.screen.colorDepth;
         }
-        
+
 site:
   name: globo.com
   script: http://s.glbimg.com/en/ho/static/CACHE/js/267143c2f15d.js
   date: 07-09-2012
   sniff: |
-       vendor = /webkit/i.test(navigator.appVersion) ? "webkit" : 
-         /firefox/i.test(navigator.userAgent) ? "Moz" 
-         : /trident/i.test(navigator.userAgent) ? "ms" 
-         : "opera" in window ? "O" : "", 
-         isAndroid = /android/gi.test(navigator.appVersion), 
-         isIDevice = /iphone|ipad/gi.test(navigator.appVersion), 
-         isPlaybook = /playbook/gi.test(navigator.appVersion), 
-         isTouchPad = /hp-tablet/gi.test(navigator.appVersion), 
-         has3d = "WebKitCSSMatrix" in window && "m11" in new WebKitCSSMatrix, 
-         hasTouch = "ontouchstart" in window && !isTouchPad, 
-         hasTransform = vendor + "Transform" in document.documentElement.style, 
+       vendor = /webkit/i.test(navigator.appVersion) ? "webkit" :
+         /firefox/i.test(navigator.userAgent) ? "Moz"
+         : /trident/i.test(navigator.userAgent) ? "ms"
+         : "opera" in window ? "O" : "",
+         isAndroid = /android/gi.test(navigator.appVersion),
+         isIDevice = /iphone|ipad/gi.test(navigator.appVersion),
+         isPlaybook = /playbook/gi.test(navigator.appVersion),
+         isTouchPad = /hp-tablet/gi.test(navigator.appVersion),
+         has3d = "WebKitCSSMatrix" in window && "m11" in new WebKitCSSMatrix,
+         hasTouch = "ontouchstart" in window && !isTouchPad,
+         hasTransform = vendor + "Transform" in document.documentElement.style,
          hasTransitionEnd = isIDevice || isPlaybook
 
 site:
